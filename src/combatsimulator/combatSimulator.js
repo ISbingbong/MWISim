@@ -201,7 +201,10 @@ class CombatSimulator extends EventTarget {
             return;
         }
 
-        for (let target of targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0)) {
+        const aliveTargets = targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0);
+
+        for (let i = 0; i < aliveTargets.length; i++) {
+            let target = aliveTargets[i];
             let source = event.source;
 
             if (target.combatDetails.combatStats.parry > Math.random()) {
@@ -224,7 +227,7 @@ class CombatSimulator extends EventTarget {
                 this.eventQueue.addEvent(curseExpirationEvent);
             }
 
-            if (!mayhem || (mayhem && attackResult.didHit)) {
+            if (!mayhem || (mayhem && attackResult.didHit) || (mayhem && i == (aliveTargets.length - 1))) {
                 this.simResult.addAttack(
                     source,
                     target,
@@ -245,7 +248,7 @@ class CombatSimulator extends EventTarget {
                 this.simResult.addAttack(target, source, "physicalReflect", attackResult.reflectDamageDone);
             }
 
-            if (mayhem && !attackResult.didHit) {
+            if (mayhem && !attackResult.didHit && i < (aliveTargets.length - 1)) {
                 attackResult.experienceGained.source = {
                     attack: 0,
                     power: 0,
