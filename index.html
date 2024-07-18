@@ -2000,13 +2000,77 @@
         </div>
         <!-- #endregion -->
     </div>
-    <button id="startAutomationButton" class="btn btn-secondary">Start Automationv2</button>
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <!-- Ability selection and simulation controls -->
+            <div class="col">
+                <h3>Ability Selection</h3>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <select id="selectAbility_1" class="form-select">
+                            <option value="">Empty</option>
+                            <option value="Heal">Heal</option>
+                            <option value="Puncture">Puncture</option>
+                            <option value="Poke">Poke</option>
+                            <option value="Entangle">Entangle</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="number" id="inputAbilityLevel_1" class="form-control" value="1" min="1" max="400" required="">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <select id="selectAbility_2" class="form-select">
+                            <option value="">Empty</option>
+                            <option value="Entangle">Entangle</option>
+                            <option value="Frenzy">Frenzy</option>
+                            <option value="Impale">Impale</option>
+                            <option value="Scratch">Scratch</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="number" id="inputAbilityLevel_2" class="form-control" value="1" min="1" max="400" required="">
+                    </div>
+                </div>
+                <button id="startAutomationButton" class="btn btn-secondary">Start Automation</button>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <!-- Simulation results table -->
+            <div class="col">
+                <h3>Simulation Results</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Experience Gain</th>
+                        </tr>
+                    </thead>
+                    <tbody id="simulationResultsTable">
+                        <!-- Results will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
     <script>
-        // ---------------------------------------------------- AUTOMATION SCRIPT ----------------------------------------------------
         // Define lists of abilities for each slot
         const abilitiesList1 = ["Heal", "Puncture", "Poke", "Entangle"];
         const abilitiesList2 = ["Entangle", "Frenzy", "Impale", "Scratch"];
-        // Add more lists as needed for abilitiesList2, abilitiesList3, etc.
 
         const abilitiesLevelList1 = ["1", "2", "3", "4"];
         const abilitiesLevelList2 = ["5", "6", "7", "8"];
@@ -2014,27 +2078,14 @@
         // Current index for each list
         let currentIndex1 = 0;
         let currentIndex2 = 0;
-        // Add more currentIndex variables for abilitiesList2, abilitiesList3, etc.
 
         function fillAbilities() {
             // Find the select elements and set their selected options
             let selectAbility1 = document.getElementById('selectAbility_1');
             let selectAbility2 = document.getElementById('selectAbility_2');
 
-            // Find the correct option and set it as selected
-            for (let i = 0; i < selectAbility1.options.length; i++) {
-                if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
-                    selectAbility1.options[i].selected = true;
-                    break;
-                }
-            }
-
-            for (let i = 0; i < selectAbility1.options.length; i++) {
-                if (selectAbility2.options[i].text === abilitiesList1[currentIndex2]) {
-                    selectAbility2.options[i].selected = true;
-                    break;
-                }
-            }
+            selectAbility1.value = abilitiesList1[currentIndex1];
+            selectAbility2.value = abilitiesList2[currentIndex2];
 
             // Set the input values for ability levels
             document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
@@ -2046,20 +2097,50 @@
         }
 
         function startSimulation() {
-            document.getElementById("buttonStartSimulation").click();
+            // Simulate starting the simulation
+            setTimeout(function() {
+                // Simulated result
+                let simulationResultExperienceGain = Math.floor(Math.random() * 1000); // Replace with actual simulation result
+
+                // Update the table with the simulation result
+                updateSimulationResultsTable(simulationResultExperienceGain);
+
+            }, 1000); // Simulating 1 second delay for the simulation to complete
+        }
+
+        function updateSimulationResultsTable(experienceGain) {
+            // Create a new row in the table
+            let table = document.getElementById("simulationResultsTable");
+            let newRow = table.insertRow();
+
+            // Insert cells into the row
+            let indexCell = newRow.insertCell(0);
+            let experienceCell = newRow.insertCell(1);
+
+            // Populate cells with data
+            indexCell.textContent = table.rows.length - 1; // Row index
+            experienceCell.textContent = experienceGain; // Simulation result
+
+            // Optionally, you can format the experienceCell content or add additional columns as needed
+
+            // Scroll to the bottom of the table
+            table.parentNode.scrollTop = table.parentNode.scrollHeight;
         }
 
         function processNextAbilities() {
             fillAbilities();
             startSimulation();
-            setTimeout(processNextAbilities, 2000); // Adjust the delay as needed
+            setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
         }
 
         document.getElementById("startAutomationButton").addEventListener("click", function() {
+            // Clear existing table rows if any
+            document.getElementById("simulationResultsTable").innerHTML = "";
+
+            // Start processing abilities
             processNextAbilities();
         });
     </script>
-
 
 
 
