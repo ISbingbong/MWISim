@@ -2000,7 +2000,7 @@
         </div>
         <!-- #endregion -->
     </div>
-    <button id="startAutomationButton" class="btn btn-secondary">Start Automation</button>
+    <button id="startAutomationButton" class="btn btn-secondary">Start Automationv2</button>
     <script>
         // ---------------------------------------------------- AUTOMATION SCRIPT ----------------------------------------------------
         // Define lists of abilities for each slot
@@ -2008,12 +2008,12 @@
         const abilitiesList2 = ["Entangle", "Frenzy", "Impale", "Scratch"];
         // Add more lists as needed for abilitiesList2, abilitiesList3, etc.
 
-        const abilitiesLevelList0 = ["1", "2", "3", "4"];
-        const abilitiesLevelList1 = ["5", "6", "7", "8"];
+        const abilitiesLevelList1 = ["1", "2", "3", "4"];
+        const abilitiesLevelList2 = ["5", "6", "7", "8"];
 
         // Current index for each list
-        let currentIndex0 = 0;
         let currentIndex1 = 0;
+        let currentIndex2 = 0;
         // Add more currentIndex variables for abilitiesList2, abilitiesList3, etc.
 
         function fillAbilities() {
@@ -2023,26 +2023,26 @@
 
             // Find the correct option and set it as selected
             for (let i = 0; i < selectAbility1.options.length; i++) {
-                if (selectAbility1.options[i].text === abilitiesList1[currentIndex0]) {
-                    selectAbility1.options[i].selected = true;
-                    break;
-                }
-            }
-
-            for (let i = 0; i < selectAbility1.options.length; i++) {
                 if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
                     selectAbility1.options[i].selected = true;
                     break;
                 }
             }
 
+            for (let i = 0; i < selectAbility1.options.length; i++) {
+                if (selectAbility1.options[i].text === abilitiesList1[currentIndex2]) {
+                    selectAbility1.options[i].selected = true;
+                    break;
+                }
+            }
+
             // Set the input values for ability levels
-            document.getElementById('inputAbilityLevel_0').value = abilitiesLevelList0[currentIndex0];
             document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
+            document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
 
             // Increment indices for the next rotation
-            currentIndex0 = (currentIndex0 + 1) % abilitiesList1.length;
-            currentIndex1 = (currentIndex1 + 1) % abilitiesList2.length;
+            currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
+            currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
         }
 
         function startSimulation() {
