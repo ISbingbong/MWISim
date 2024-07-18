@@ -2185,18 +2185,27 @@
         // Define lists of abilities for each slot
         const abilitiesList1 = ["Heal", "Puncture", "Poke", "Entangle"];
         const abilitiesList2 = ["Entangle", "Frenzy", "Impale", "Scratch"];
+        const abilitiesList3 = ["Fireball", "Firestorm", "Toughness", "Berserk"];
+        const abilitiesList4 = ["Smack", "Sweep", "Cleave", "Elusiveness"]; 
         
         const abilitiesLevelList1 = ["1", "2", "3", "4"];
         const abilitiesLevelList2 = ["5", "6", "7", "8"];
+        const abilitiesLevelList3 = ["9", "10", "11", "12"];
+        const abilitiesLevelList4 = ["13", "14", "15", "16"];
         
         // Current index for each list
         let currentIndex1 = 0;
         let currentIndex2 = 0;
+        let currentIndex3 = 0;
+        let currentIndex4 = 0;
+        
         
         function fillAbilities() {
         // Find the select elements and set their selected options
         let selectAbility1 = document.getElementById('selectAbility_1');
         let selectAbility2 = document.getElementById('selectAbility_2');
+        let selectAbility3 = document.getElementById('selectAbility_3');
+        let selectAbility4 = document.getElementById('selectAbility_4');
         
         // Find the correct option and set it as selected
         for (let i = 0; i < selectAbility1.options.length; i++) {
@@ -2213,26 +2222,45 @@
             }
         }
         
+        for (let i = 0; i < selectAbility1.options.length; i++) {
+            if (selectAbility3.options[i].text === abilitiesList3[currentIndex3]) {
+                selectAbility3.options[i].selected = true;
+                break;
+            }
+        }
+        
+        for (let i = 0; i < selectAbility1.options.length; i++) {
+            if (selectAbility4.options[i].text === abilitiesList4[currentIndex4]) {
+                selectAbility4.options[i].selected = true;
+                break;
+            }
+        }
+        
         // Set the input values for ability levels
         document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
         document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
+        document.getElementById('inputAbilityLevel_3').value = abilitiesLevelList3[currentIndex3];
+        document.getElementById('inputAbilityLevel_4').value = abilitiesLevelList4[currentIndex4];
         
         // Increment indices for the next rotation
         currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
         currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
+        currentIndex3 = (currentIndex3 + 1) % abilitiesList3.length;
+        currentIndex4 = (currentIndex4 + 1) % abilitiesList4.length;
         }
         
         function startSimulation() {
             // Simulate starting the simulation
             setTimeout(function() {
-                // Simulated result
-                let simulationResultExperienceGain = Math.floor(Math.random() * 1000); // Replace with actual simulation result
-        
+                // Get the actual simulation result from wherever it's stored
+                let actualResultExperienceGain = simulationResultExperienceGain; // Replace with how you retrieve the actual result
+                
                 // Update the table with the simulation result
-                updateSimulationResultsTable(simulationResultExperienceGain);
-        
+                updateSimulationResultsTable(actualResultExperienceGain);
+
             }, 1000); // Simulating 1 second delay for the simulation to complete
         }
+
         
         function updateSimulationResultsTable(experienceGain) {
             // Create a new row in the table
