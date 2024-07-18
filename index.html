@@ -2254,7 +2254,8 @@
             // Simulate starting the simulation
             setTimeout(function() {
                 // Get the actual simulation result from wherever it's stored
-                let actualResultExperienceGain = totalExperiencePerHour; // Replace with how you retrieve the actual result
+                let expGain = document.getElementById('simulationResultExperienceGain').value;
+                let actualResultExperienceGain = expGain; // Replace with how you retrieve the actual result
                 
                 // Update the table with the simulation result
                 updateSimulationResultsTable(actualResultExperienceGain);
