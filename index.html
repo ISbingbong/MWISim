@@ -2107,6 +2107,17 @@
             return selectedAbilities;
         }
     
+        // Function to add a new ability selection row
+        document.getElementById('addAbilityRowButton').addEventListener('click', function () {
+            // Clone the template row and append it to the abilityRows container
+            const abilityRowsContainer = document.getElementById('abilityRows');
+            const rowTemplate = document.querySelector('.ability-row');
+            const newRow = rowTemplate.cloneNode(true);
+            newRow.style.display = ''; // Make sure the cloned row is visible
+            abilityRowsContainer.appendChild(newRow);
+        });
+
+
         // Function to fill abilities into combinations lists
         function fillAbilitiesIntoLists(selectedAbilities) {
             // Clear previous lists
