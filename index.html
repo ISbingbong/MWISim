@@ -2250,6 +2250,7 @@
         }
         
         function startSimulation() {
+            document.getElementById("buttonStartSimulation").click();
             // Simulate starting the simulation
             setTimeout(function() {
                 // Get the actual simulation result from wherever it's stored
@@ -2259,8 +2260,8 @@
                 updateSimulationResultsTable(actualResultExperienceGain);
 
             }, 1000); // Simulating 1 second delay for the simulation to complete
-                document.getElementById("buttonStartSimulation").click();
-            }
+                
+            
         }
 
         
