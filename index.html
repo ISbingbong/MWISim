@@ -2285,6 +2285,8 @@
             document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
             document.getElementById('inputAbilityLevel_3').value = abilitiesLevelList3[currentIndex3];
             document.getElementById('inputAbilityLevel_4').value = abilitiesLevelList4[currentIndex4];
+                 
+            // Increment indices for the next rotation
             currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
             currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
             currentIndex3 = (currentIndex3 + 1) % abilitiesList3.length;
@@ -2293,13 +2295,13 @@
 
         // Function to start simulation (simulated for demonstration)
         function startSimulation() {
-        document.getElementById("buttonStartSimulation").click();
+            document.getElementById("buttonStartSimulation").click();
 
-                // Update the table with the simulation result
-                updateSimulationResultsTable(simulationResultExperienceGain);
-    
-            }, 1000); // Simulating 1 second delay for the simulation to complete
-        }
+                    // Update the table with the simulation result
+                    updateSimulationResultsTable(simulationResultExperienceGain);
+        
+                }, 1000); // Simulating 1 second delay for the simulation to complete
+            }
     
         // Function to update simulation results table
         function updateSimulationResultsTable(experienceGain) {
