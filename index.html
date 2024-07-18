@@ -2262,7 +2262,7 @@
         }
 
         
-        function updateSimulationResultsTable(experienceGain) {
+        function updateSimulationResultsTable(actualResultExperienceGain) {
             // Create a new row in the table
             let table = document.getElementById("simulationResultsTable");
             let newRow = table.insertRow();
@@ -2273,7 +2273,7 @@
         
             // Populate cells with data
             indexCell.textContent = table.rows.length - 1; // Row index
-            experienceCell.textContent = experienceGain; // Simulation result
+            experienceCell.textContent = actualResultExperienceGain; // Simulation result
         
             // Optionally, you can format the experienceCell content or add additional columns as needed
         
