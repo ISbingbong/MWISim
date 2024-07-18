@@ -2128,6 +2128,43 @@
             }
         }
     
+        function fillAbilities() {
+        // Find the select elements and set their selected options
+        let selectAbility1 = document.getElementById('selectAbility_1');
+        let selectAbility2 = document.getElementById('selectAbility_2');
+        let selectAbility3 = document.getElementById('selectAbility_3');
+        let selectAbility4 = document.getElementById('selectAbility_4');
+
+        // Find the correct option and set it as selected
+        for (let i = 0; i < selectAbility1.options.length; i++) {
+            if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
+                selectAbility1.options[i].selected = true;
+                break;
+            }
+        }
+
+        for (let i = 0; i < selectAbility1.options.length; i++) {
+            if (selectAbility2.options[i].text === abilitiesList2[currentIndex2]) {
+                selectAbility2.options[i].selected = true;
+                break;
+            }
+        }
+
+        for (let i = 0; i < selectAbility3.options.length; i++) {
+            if (selectAbility3.options[i].text === abilitiesList3[currentIndex3]) {
+                selectAbility3.options[i].selected = true;
+                break;
+            }
+        }
+
+        for (let i = 0; i < selectAbility4.options.length; i++) {
+            if (selectAbility4.options[i].text === abilitiesList4[currentIndex4]) {
+                selectAbility4.options[i].selected = true;
+                break;
+            }
+        }
+
+
         // Function to start simulation (simulated for demonstration)
         function startSimulation() {
             // Simulate starting the simulation
