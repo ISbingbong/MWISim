@@ -2010,24 +2010,30 @@
             <!-- Ability selection and simulation controls -->
             <div class="col">
                 <h3>Ability Selection</h3>
-                
-                <!-- Ability Selection Rows -->
-                <div class="row mb-3" id="abilityRows">
-                    <!-- Each row represents one ability selection -->
-                    <!-- Example: for 4 abilities, you will have 4 of these rows -->
-                    <div class="col-md-6">
-                        <select class="form-select ability-select">
-                            <option value="">Empty</option>
-                            <option value="Heal">Heal</option>
-                            <option value="Puncture">Puncture</option>
-                            <option value="Poke">Poke</option>
-                            <option value="Entangle">Entangle</option>
-                            <!-- Add more options as needed -->
-                        </select>
+    
+                <!-- Ability Selection Rows Container -->
+                <div id="abilityRows">
+                    <!-- Row Template (hidden initially) -->
+                    <div class="row mb-3 ability-row" style="display: none;">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
-                    </div>
+                </div>
+    
+                <!-- Button to add new ability selection row -->
+                <div class="mb-3">
+                    <button id="addAbilityRowButton" class="btn btn-primary">Add Ability</button>
                 </div>
     
                 <button id="startAutomationButton" class="btn btn-secondary">Start Automation</button>
@@ -2052,6 +2058,7 @@
             </div>
         </div>
     </div>
+    
     
 
 
