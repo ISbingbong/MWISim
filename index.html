@@ -2320,13 +2320,13 @@
             const selectedAbilities = getSelectedAbilities();
     
             // Fill abilities into combinations lists
-            fillAbilitiesIntoLists(selectedAbilities);
+            fillAbilities();
     
             // Start simulation
             startSimulation();
     
             // Optionally, automate the next process after a delay (adjust delay as needed)
-            // setTimeout(processNextAbilities, 3000); // Example: Delay of 3 seconds
+            setTimeout(processNextAbilities, 3000); // Example: Delay of 3 seconds
         }
     
         // Event listener for Start Automation button
