@@ -2132,6 +2132,29 @@ function updateTable(tableId, item, price) {
     return newTotal - oldTotal;
 }
 
+// ------------------------------------------------ AUTOMATIOM ------------------------------------------------
+
+
+function updateSimulationResultsTable(totalExperiencePerHour) {
+    // Create a new row in the table
+    let table = document.getElementById("simulationResultsTable");
+    let newRow = table.insertRow();
+
+    // Insert cells into the row
+    let indexCell = newRow.insertCell(0);
+    let experienceCell = newRow.insertCell(1);
+
+    // Populate cells with data
+    indexCell.textContent = table.rows.length - 1; // Row index
+    experienceCell.textContent = totalExperiencePerHour; // Simulation result
+
+    // Optionally, you can format the experienceCell content or add additional columns as needed
+
+    // Scroll to the bottom of the table
+    table.parentNode.scrollTop = table.parentNode.scrollHeight;
+}
+
+
 // #endregion
 
 function updateState() {

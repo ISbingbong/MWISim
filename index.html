@@ -2253,12 +2253,6 @@
             document.getElementById("buttonStartSimulation").click();
             // Simulate starting the simulation
             setTimeout(function() {
-                // Get the actual simulation result from wherever it's stored
-                let expGain = document.getElementById('simulationResultExperienceGain').value;
-                let actualResultExperienceGain = expGain; // Replace with how you retrieve the actual result
-                
-                // Update the table with the simulation result
-                updateSimulationResultsTable(actualResultExperienceGain);
 
             }, 1000); // Simulating 1 second delay for the simulation to complete
                 
@@ -2266,24 +2260,6 @@
         }
 
         
-        function updateSimulationResultsTable(actualResultExperienceGain) {
-            // Create a new row in the table
-            let table = document.getElementById("simulationResultsTable");
-            let newRow = table.insertRow();
-        
-            // Insert cells into the row
-            let indexCell = newRow.insertCell(0);
-            let experienceCell = newRow.insertCell(1);
-        
-            // Populate cells with data
-            indexCell.textContent = table.rows.length - 1; // Row index
-            experienceCell.textContent = actualResultExperienceGain; // Simulation result
-        
-            // Optionally, you can format the experienceCell content or add additional columns as needed
-        
-            // Scroll to the bottom of the table
-            table.parentNode.scrollTop = table.parentNode.scrollHeight;
-        }
         
         function processNextAbilities() {
             fillAbilities();
