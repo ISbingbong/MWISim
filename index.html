@@ -2010,11 +2010,11 @@
             <!-- Ability selection and simulation controls -->
             <div class="col">
                 <h3>Ability Selection</h3>
-    
-                <!-- Ability Selection Rows Container -->
+                
+                <!-- Ability Selection Rows -->
                 <div id="abilityRows">
-                    <!-- Row Template (hidden initially) -->
-                    <div class="row mb-3 ability-row" style="display: none;">
+                    <!-- Row 1 -->
+                    <div class="row mb-3">
                         <div class="col-md-6">
                             <select class="form-select ability-select">
                                 <option value="">Empty</option>
@@ -2029,11 +2029,125 @@
                             <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
                         </div>
                     </div>
-                </div>
     
-                <!-- Button to add new ability selection row -->
-                <div class="mb-3">
-                    <button id="addAbilityRowButton" class="btn btn-primary">Add Ability</button>
+                    <!-- Row 2 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 3 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 4 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 5 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 6 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 7 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 8 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                        </div>
+                    </div>
                 </div>
     
                 <button id="startAutomationButton" class="btn btn-secondary">Start Automation</button>
@@ -2058,6 +2172,7 @@
             </div>
         </div>
     </div>
+    
     
     
 
@@ -2106,16 +2221,6 @@
     
             return selectedAbilities;
         }
-    
-        // Function to add a new ability selection row
-        document.getElementById('addAbilityRowButton').addEventListener('click', function () {
-            // Clone the template row and append it to the abilityRows container
-            const abilityRowsContainer = document.getElementById('abilityRows');
-            const rowTemplate = document.querySelector('.ability-row');
-            const newRow = rowTemplate.cloneNode(true);
-            newRow.style.display = ''; // Make sure the cloned row is visible
-            abilityRowsContainer.appendChild(newRow);
-        });
 
 
         // Function to fill abilities into combinations lists
