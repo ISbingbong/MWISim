@@ -2245,44 +2245,53 @@
         }
     
         function fillAbilities() {
-        // Find the select elements and set their selected options
-        let selectAbility1 = document.getElementById('selectAbility_1');
-        let selectAbility2 = document.getElementById('selectAbility_2');
-        let selectAbility3 = document.getElementById('selectAbility_3');
-        let selectAbility4 = document.getElementById('selectAbility_4');
+            // Find the select elements and set their selected options
+            let selectAbility1 = document.getElementById('selectAbility_1');
+            let selectAbility2 = document.getElementById('selectAbility_2');
+            let selectAbility3 = document.getElementById('selectAbility_3');
+            let selectAbility4 = document.getElementById('selectAbility_4');
 
-        // Find the correct option and set it as selected
-        for (let i = 0; i < selectAbility1.options.length; i++) {
-            if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
-                selectAbility1.options[i].selected = true;
-                break;
+            // Find the correct option and set it as selected
+            for (let i = 0; i < selectAbility1.options.length; i++) {
+                if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
+                    selectAbility1.options[i].selected = true;
+                    break;
+                }
             }
-        }
 
-        for (let i = 0; i < selectAbility1.options.length; i++) {
-            if (selectAbility2.options[i].text === abilitiesList2[currentIndex2]) {
-                selectAbility2.options[i].selected = true;
-                break;
+            for (let i = 0; i < selectAbility1.options.length; i++) {
+                if (selectAbility2.options[i].text === abilitiesList2[currentIndex2]) {
+                    selectAbility2.options[i].selected = true;
+                    break;
+                }
             }
-        }
 
-        for (let i = 0; i < selectAbility3.options.length; i++) {
-            if (selectAbility3.options[i].text === abilitiesList3[currentIndex3]) {
-                selectAbility3.options[i].selected = true;
-                break;
+            for (let i = 0; i < selectAbility3.options.length; i++) {
+                if (selectAbility3.options[i].text === abilitiesList3[currentIndex3]) {
+                    selectAbility3.options[i].selected = true;
+                    break;
+                }
             }
-        }
 
-        for (let i = 0; i < selectAbility4.options.length; i++) {
-            if (selectAbility4.options[i].text === abilitiesList4[currentIndex4]) {
-                selectAbility4.options[i].selected = true;
-                break;
+            for (let i = 0; i < selectAbility4.options.length; i++) {
+                if (selectAbility4.options[i].text === abilitiesList4[currentIndex4]) {
+                    selectAbility4.options[i].selected = true;
+                    break;
+                }
             }
-        }
 
+            // Set the input values for ability levels
+            document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
+            document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
+            document.getElementById('inputAbilityLevel_3').value = abilitiesLevelList3[currentIndex3];
+            document.getElementById('inputAbilityLevel_4').value = abilitiesLevelList4[currentIndex4];
+            currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
+            currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
+            currentIndex3 = (currentIndex3 + 1) % abilitiesList3.length;
+            currentIndex4 = (currentIndex4 + 1) % abilitiesList4.length;
+        }
 
         // Function to start simulation (simulated for demonstration)
-
         function startSimulation() {
         document.getElementById("buttonStartSimulation").click();
 
