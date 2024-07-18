@@ -2010,34 +2010,26 @@
             <!-- Ability selection and simulation controls -->
             <div class="col">
                 <h3>Ability Selection</h3>
-                <div class="row mb-3">
+                
+                <!-- Ability Selection Rows -->
+                <div class="row mb-3" id="abilityRows">
+                    <!-- Each row represents one ability selection -->
+                    <!-- Example: for 4 abilities, you will have 4 of these rows -->
                     <div class="col-md-6">
-                        <select id="selectAbility_1" class="form-select">
+                        <select class="form-select ability-select">
                             <option value="">Empty</option>
                             <option value="Heal">Heal</option>
                             <option value="Puncture">Puncture</option>
                             <option value="Poke">Poke</option>
                             <option value="Entangle">Entangle</option>
+                            <!-- Add more options as needed -->
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <input type="number" id="inputAbilityLevel_1" class="form-control" value="1" min="1" max="400" required="">
+                        <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <select id="selectAbility_2" class="form-select">
-                            <option value="">Empty</option>
-                            <option value="Entangle">Entangle</option>
-                            <option value="Frenzy">Frenzy</option>
-                            <option value="Impale">Impale</option>
-                            <option value="Scratch">Scratch</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="number" id="inputAbilityLevel_2" class="form-control" value="1" min="1" max="400" required="">
-                    </div>
-                </div>
+    
                 <button id="startAutomationButton" class="btn btn-secondary">Start Automation</button>
             </div>
         </div>
@@ -2060,7 +2052,7 @@
             </div>
         </div>
     </div>
-
+    
 
 
 
@@ -2068,91 +2060,125 @@
 
 
     <script>
-        // Define lists of abilities for each slot
-        const abilitiesList1 = ["Heal", "Puncture", "Poke", "Entangle"];
-        const abilitiesList2 = ["Entangle", "Frenzy", "Impale", "Scratch"];
-
-        const abilitiesLevelList1 = ["1", "2", "3", "4"];
-        const abilitiesLevelList2 = ["5", "6", "7", "8"];
-
-        // Current index for each list
-        let currentIndex1 = 0;
-        let currentIndex2 = 0;
-
-        function fillAbilities() {
-        // Find the select elements and set their selected options
-        let selectAbility1 = document.getElementById('selectAbility_1');
-        let selectAbility2 = document.getElementById('selectAbility_2');
-
-        // Find the correct option and set it as selected
-        for (let i = 0; i < selectAbility1.options.length; i++) {
-            if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
-                selectAbility1.options[i].selected = true;
-                break;
+        // Initialize lists for abilities combinations
+        const abilitiesList1 = [];
+        const abilitiesList2 = [];
+        const abilitiesList3 = [];
+        const abilitiesList4 = [];
+    
+        // Function to generate combinations of abilities
+        function generateAbilityCombinations(selectedAbilities) {
+            const combinations = [];
+    
+            // Generate combinations of 4 abilities from selectedAbilities
+            for (let i = 0; i < selectedAbilities.length; i++) {
+                for (let j = i + 1; j < selectedAbilities.length; j++) {
+                    for (let k = j + 1; k < selectedAbilities.length; k++) {
+                        for (let l = k + 1; l < selectedAbilities.length; l++) {
+                            combinations.push([selectedAbilities[i], selectedAbilities[j], selectedAbilities[k], selectedAbilities[l]]);
+                        }
+                    }
+                }
+            }
+    
+            return combinations;
+        }
+    
+        // Function to get selected abilities and their levels
+        function getSelectedAbilities() {
+            const selectedAbilities = [];
+    
+            // Iterate through each ability selection row
+            document.querySelectorAll('.ability-select').forEach((selectElement, index) => {
+                const selectedAbility = selectElement.value.trim();
+                if (selectedAbility !== '') {
+                    const level = document.querySelectorAll('.ability-level')[index].value.trim();
+                    selectedAbilities.push({ ability: selectedAbility, level: level });
+                }
+            });
+    
+            return selectedAbilities;
+        }
+    
+        // Function to fill abilities into combinations lists
+        function fillAbilitiesIntoLists(selectedAbilities) {
+            // Clear previous lists
+            abilitiesList1.length = 0;
+            abilitiesList2.length = 0;
+            abilitiesList3.length = 0;
+            abilitiesList4.length = 0;
+    
+            // Generate combinations
+            const combinations = generateAbilityCombinations(selectedAbilities);
+    
+            // Distribute combinations into lists
+            for (let i = 0; i < combinations.length; i++) {
+                const combination = combinations[i];
+                abilitiesList1.push(combination[0]);
+                abilitiesList2.push(combination[1]);
+                abilitiesList3.push(combination[2]);
+                abilitiesList4.push(combination[3]);
             }
         }
-
-        for (let i = 0; i < selectAbility1.options.length; i++) {
-            if (selectAbility2.options[i].text === abilitiesList2[currentIndex2]) {
-                selectAbility2.options[i].selected = true;
-                break;
-            }
-        }
-
-        // Set the input values for ability levels
-        document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
-        document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
-
-        // Increment indices for the next rotation
-        currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
-        currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
-    }
-
+    
+        // Function to start simulation (simulated for demonstration)
         function startSimulation() {
             // Simulate starting the simulation
-            setTimeout(function() {
+            setTimeout(function () {
                 // Simulated result
-                let simulationResultExperienceGain = Math.floor(Math.random() * 1000); // Replace with actual simulation result
-
+                const simulationResultExperienceGain = Math.floor(Math.random() * 1000); // Replace with actual simulation result
+    
                 // Update the table with the simulation result
                 updateSimulationResultsTable(simulationResultExperienceGain);
-
+    
             }, 1000); // Simulating 1 second delay for the simulation to complete
         }
-
+    
+        // Function to update simulation results table
         function updateSimulationResultsTable(experienceGain) {
             // Create a new row in the table
-            let table = document.getElementById("simulationResultsTable");
-            let newRow = table.insertRow();
-
+            const table = document.getElementById("simulationResultsTable");
+            const newRow = table.insertRow();
+    
             // Insert cells into the row
-            let indexCell = newRow.insertCell(0);
-            let experienceCell = newRow.insertCell(1);
-
+            const indexCell = newRow.insertCell(0);
+            const experienceCell = newRow.insertCell(1);
+    
             // Populate cells with data
             indexCell.textContent = table.rows.length - 1; // Row index
             experienceCell.textContent = experienceGain; // Simulation result
-
+    
             // Optionally, you can format the experienceCell content or add additional columns as needed
-
+    
             // Scroll to the bottom of the table
             table.parentNode.scrollTop = table.parentNode.scrollHeight;
         }
-
+    
+        // Function to process next abilities combination
         function processNextAbilities() {
-            fillAbilities();
+            // Get selected abilities
+            const selectedAbilities = getSelectedAbilities();
+    
+            // Fill abilities into combinations lists
+            fillAbilitiesIntoLists(selectedAbilities);
+    
+            // Start simulation
             startSimulation();
-            setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
+    
+            // Optionally, automate the next process after a delay (adjust delay as needed)
+            // setTimeout(processNextAbilities, 3000); // Example: Delay of 3 seconds
         }
-
-        document.getElementById("startAutomationButton").addEventListener("click", function() {
+    
+        // Event listener for Start Automation button
+        document.getElementById("startAutomationButton").addEventListener("click", function () {
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
-
+    
             // Start processing abilities
             processNextAbilities();
         });
     </script>
+    
 
 
 
