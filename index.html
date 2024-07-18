@@ -2000,6 +2000,77 @@
         </div>
         <!-- #endregion -->
     </div>
+
+    <script>
+        // ---------------------------------------------------- AUTOMATION SCRIPT ----------------------------------------------------
+        // Define lists of abilities for each slot
+        const abilitiesList0 = ["Heal", "Puncture", "Poke", "Entangle"];
+        const abilitiesList1 = ["Entangle", "Frenzy", "Impale", "Scratch"];
+        // Add more lists as needed for abilitiesList2, abilitiesList3, etc.
+
+        const abilitiesLevelList0 = ["1", "2", "3", "4"];
+        const abilitiesLevelList1 = ["5", "6", "7", "8"];
+
+        // Current index for each list
+        let currentIndex0 = 0;
+        let currentIndex1 = 0;
+        // Add more currentIndex variables for abilitiesList2, abilitiesList3, etc.
+
+        function fillAbilities() {
+            // Find the select elements and set their selected options
+            let selectAbility0 = document.getElementById('selectAbility_0');
+            let selectAbility1 = document.getElementById('selectAbility_1');
+
+            // Find the correct option and set it as selected
+            for (let i = 0; i < selectAbility0.options.length; i++) {
+                if (selectAbility0.options[i].text === abilitiesList0[currentIndex0]) {
+                    selectAbility0.options[i].selected = true;
+                    break;
+                }
+            }
+
+            for (let i = 0; i < selectAbility1.options.length; i++) {
+                if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
+                    selectAbility1.options[i].selected = true;
+                    break;
+                }
+            }
+
+            // Set the input values for ability levels
+            document.getElementById('inputAbilityLevel_0').value = abilitiesLevelList0[currentIndex0];
+            document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
+
+            // Increment indices for the next rotation
+            currentIndex0 = (currentIndex0 + 1) % abilitiesList0.length;
+            currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
+        }
+
+        function startSimulation() {
+            document.getElementById("buttonStartSimulation").click();
+        }
+
+        function processNextAbilities() {
+            fillAbilities();
+            startSimulation();
+            setTimeout(processNextAbilities, 2000); // Adjust the delay as needed
+        }
+
+        document.getElementById("startAutomationButton").addEventListener("click", function() {
+            processNextAbilities();
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
