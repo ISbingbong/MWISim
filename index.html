@@ -2004,8 +2004,8 @@
     <script>
         // ---------------------------------------------------- AUTOMATION SCRIPT ----------------------------------------------------
         // Define lists of abilities for each slot
-        const abilitiesList0 = ["Heal", "Puncture", "Poke", "Entangle"];
-        const abilitiesList1 = ["Entangle", "Frenzy", "Impale", "Scratch"];
+        const abilitiesList1 = ["Heal", "Puncture", "Poke", "Entangle"];
+        const abilitiesList2 = ["Entangle", "Frenzy", "Impale", "Scratch"];
         // Add more lists as needed for abilitiesList2, abilitiesList3, etc.
 
         const abilitiesLevelList0 = ["1", "2", "3", "4"];
@@ -2018,13 +2018,13 @@
 
         function fillAbilities() {
             // Find the select elements and set their selected options
-            let selectAbility0 = document.getElementById('selectAbility_0');
             let selectAbility1 = document.getElementById('selectAbility_1');
+            let selectAbility2 = document.getElementById('selectAbility_2');
 
             // Find the correct option and set it as selected
-            for (let i = 0; i < selectAbility0.options.length; i++) {
-                if (selectAbility0.options[i].text === abilitiesList0[currentIndex0]) {
-                    selectAbility0.options[i].selected = true;
+            for (let i = 0; i < selectAbility1.options.length; i++) {
+                if (selectAbility1.options[i].text === abilitiesList1[currentIndex0]) {
+                    selectAbility1.options[i].selected = true;
                     break;
                 }
             }
@@ -2041,8 +2041,8 @@
             document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
 
             // Increment indices for the next rotation
-            currentIndex0 = (currentIndex0 + 1) % abilitiesList0.length;
-            currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
+            currentIndex0 = (currentIndex0 + 1) % abilitiesList1.length;
+            currentIndex1 = (currentIndex1 + 1) % abilitiesList2.length;
         }
 
         function startSimulation() {
