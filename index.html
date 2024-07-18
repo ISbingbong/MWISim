@@ -2293,16 +2293,17 @@
             currentIndex4 = (currentIndex4 + 1) % abilitiesList4.length;
         }
 
-        // Function to start simulation (simulated for demonstration)
+        // Function to start simulation
         function startSimulation() {
+            // Trigger the click event to start the simulation
             document.getElementById("buttonStartSimulation").click();
 
-                    // Update the table with the simulation result
-                    updateSimulationResultsTable(simulationResultExperienceGain);
-        
-                }, 1000); // Simulating 1 second delay for the simulation to complete
-            }
-    
+            // Simulate a delay of 1 second for the simulation to complete
+            setTimeout(function() {
+                // Update the table with the simulation result
+                updateSimulationResultsTable(simulationResultExperienceGain);
+            }, 1000);
+        }
         // Function to update simulation results table
         function updateSimulationResultsTable(experienceGain) {
             // Create a new row in the table
