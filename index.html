@@ -2182,158 +2182,91 @@
 
 
     <script>
-        // Initialize lists for abilities combinations
-        const abilitiesList1 = [];
-        const abilitiesList2 = [];
-        const abilitiesList3 = [];
-        const abilitiesList4 = [];
-    
-        // Current indices for each abilities list
+        // Define lists of abilities for each slot
+        const abilitiesList1 = ["Heal", "Puncture", "Poke", "Entangle"];
+        const abilitiesList2 = ["Entangle", "Frenzy", "Impale", "Scratch"];
+        
+        const abilitiesLevelList1 = ["1", "2", "3", "4"];
+        const abilitiesLevelList2 = ["5", "6", "7", "8"];
+        
+        // Current index for each list
         let currentIndex1 = 0;
         let currentIndex2 = 0;
-        let currentIndex3 = 0;
-        let currentIndex4 = 0;
-    
-        // Function to generate combinations of abilities
-        function generateAbilityCombinations(selectedAbilities) {
-            const combinations = [];
-    
-            // Generate combinations of 4 abilities from selectedAbilities
-            for (let i = 0; i < selectedAbilities.length; i++) {
-                for (let j = i + 1; j < selectedAbilities.length; j++) {
-                    for (let k = j + 1; k < selectedAbilities.length; k++) {
-                        for (let l = k + 1; l < selectedAbilities.length; l++) {
-                            combinations.push([selectedAbilities[i], selectedAbilities[j], selectedAbilities[k], selectedAbilities[l]]);
-                        }
-                    }
-                }
-            }
-    
-            return combinations;
-        }
-    
-        // Function to get selected abilities and their levels
-        function getSelectedAbilities() {
-            const selectedAbilities = [];
-    
-            // Iterate through each ability selection row
-            document.querySelectorAll('.ability-select').forEach((selectElement, index) => {
-                const selectedAbility = selectElement.value.trim();
-                if (selectedAbility !== '') {
-                    const level = document.querySelectorAll('.ability-level')[index].value.trim();
-                    selectedAbilities.push({ ability: selectedAbility, level: level });
-                }
-            });
-    
-            return selectedAbilities;
-        }
-    
-        // Function to fill abilities into combinations lists
-        function fillAbilitiesIntoLists(selectedAbilities) {
-            // Clear previous lists
-            abilitiesList1.length = 0;
-            abilitiesList2.length = 0;
-            abilitiesList3.length = 0;
-            abilitiesList4.length = 0;
-    
-            // Generate combinations
-            const combinations = generateAbilityCombinations(selectedAbilities);
-    
-            // Distribute combinations into lists
-            for (let i = 0; i < combinations.length; i++) {
-                const combination = combinations[i];
-                abilitiesList1.push(combination[0].ability);
-                abilitiesList2.push(combination[1].ability);
-                abilitiesList3.push(combination[2].ability);
-                abilitiesList4.push(combination[3].ability);
-            }
-        }
-    
-        // Function to fill abilities into the selection dropdowns
+        
         function fillAbilities() {
-            // Find all select elements for abilities
-            const selectElements = document.querySelectorAll('.ability-select');
-    
-            // Iterate through each select element and set the selected option
-            selectElements.forEach((selectElement, index) => {
-                // Get the corresponding abilities list index (1-based)
-                const abilitiesIndex = Math.ceil((index + 1) / 2);
-    
-                // Set the selected option based on currentIndex
-                selectElement.value = window[`abilitiesList${abilitiesIndex}`][currentIndex1];
-            });
-    
-            // Set the input values for ability levels
-            document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
-            document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
-            document.getElementById('inputAbilityLevel_3').value = abilitiesLevelList3[currentIndex3];
-            document.getElementById('inputAbilityLevel_4').value = abilitiesLevelList4[currentIndex4];
-    
-            // Increment indices for the next rotation
-            currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
-            currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
-            currentIndex3 = (currentIndex3 + 1) % abilitiesList3.length;
-            currentIndex4 = (currentIndex4 + 1) % abilitiesList4.length;
+        // Find the select elements and set their selected options
+        let selectAbility1 = document.getElementById('selectAbility_1');
+        let selectAbility2 = document.getElementById('selectAbility_2');
+        
+        // Find the correct option and set it as selected
+        for (let i = 0; i < selectAbility1.options.length; i++) {
+            if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
+                selectAbility1.options[i].selected = true;
+                break;
+            }
         }
-    
-        // Function to start simulation
+        
+        for (let i = 0; i < selectAbility1.options.length; i++) {
+            if (selectAbility2.options[i].text === abilitiesList2[currentIndex2]) {
+                selectAbility2.options[i].selected = true;
+                break;
+            }
+        }
+        
+        // Set the input values for ability levels
+        document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
+        document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
+        
+        // Increment indices for the next rotation
+        currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
+        currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
+        }
+        
         function startSimulation() {
-            // Simulate starting the simulation (here we just log for demonstration)
-            console.log('Simulating...');
-    
-            // Simulate a delay and then update the table
+            // Simulate starting the simulation
             setTimeout(function() {
-                const simulationResultExperienceGain = Math.floor(Math.random() * 1000); // Replace with actual simulation result
+                // Simulated result
+                let simulationResultExperienceGain = Math.floor(Math.random() * 1000); // Replace with actual simulation result
+        
+                // Update the table with the simulation result
                 updateSimulationResultsTable(simulationResultExperienceGain);
-            }, 1000); // Simulate 1 second delay
+        
+            }, 1000); // Simulating 1 second delay for the simulation to complete
         }
-    
-        // Function to update simulation results table
+        
         function updateSimulationResultsTable(experienceGain) {
             // Create a new row in the table
-            const table = document.getElementById("simulationResultsTable");
-            const newRow = table.insertRow();
-    
+            let table = document.getElementById("simulationResultsTable");
+            let newRow = table.insertRow();
+        
             // Insert cells into the row
-            const indexCell = newRow.insertCell(0);
-            const experienceCell = newRow.insertCell(1);
-    
+            let indexCell = newRow.insertCell(0);
+            let experienceCell = newRow.insertCell(1);
+        
             // Populate cells with data
             indexCell.textContent = table.rows.length - 1; // Row index
             experienceCell.textContent = experienceGain; // Simulation result
-    
+        
+            // Optionally, you can format the experienceCell content or add additional columns as needed
+        
             // Scroll to the bottom of the table
             table.parentNode.scrollTop = table.parentNode.scrollHeight;
         }
-    
-        // Function to process next abilities combination
+        
         function processNextAbilities() {
-            // Get selected abilities
-            const selectedAbilities = getSelectedAbilities();
-    
-            // Fill abilities into combinations lists
-            fillAbilitiesIntoLists(selectedAbilities);
-    
-            // Fill abilities into selection dropdowns
             fillAbilities();
-    
-            // Start simulation
             startSimulation();
-    
-            // Optionally, automate the next process after a delay (adjust delay as needed)
-            setTimeout(processNextAbilities, 3000); // Example: Delay of 3 seconds
+            setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
         }
-    
-        // Event listener for Start Automation button
+        
         document.getElementById("startAutomationButton").addEventListener("click", function() {
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
-    
+        
             // Start processing abilities
             processNextAbilities();
         });
-    </script>
-    
+        </script>
     
 
     
