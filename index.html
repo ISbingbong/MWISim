@@ -2080,21 +2080,33 @@
         let currentIndex2 = 0;
 
         function fillAbilities() {
-            // Find the select elements and set their selected options
-            let selectAbility1 = document.getElementById('selectAbility_1');
-            let selectAbility2 = document.getElementById('selectAbility_2');
+        // Find the select elements and set their selected options
+        let selectAbility1 = document.getElementById('selectAbility_1');
+        let selectAbility2 = document.getElementById('selectAbility_2');
 
-            selectAbility1.value = abilitiesList1[currentIndex1];
-            selectAbility2.value = abilitiesList2[currentIndex2];
-
-            // Set the input values for ability levels
-            document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
-            document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
-
-            // Increment indices for the next rotation
-            currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
-            currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
+        // Find the correct option and set it as selected
+        for (let i = 0; i < selectAbility1.options.length; i++) {
+            if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
+                selectAbility1.options[i].selected = true;
+                break;
+            }
         }
+
+        for (let i = 0; i < selectAbility1.options.length; i++) {
+            if (selectAbility2.options[i].text === abilitiesList1[currentIndex2]) {
+                selectAbility2.options[i].selected = true;
+                break;
+            }
+        }
+
+        // Set the input values for ability levels
+        document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
+        document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
+
+        // Increment indices for the next rotation
+        currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
+        currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
+    }
 
         function startSimulation() {
             // Simulate starting the simulation
