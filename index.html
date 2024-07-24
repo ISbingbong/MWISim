@@ -2013,9 +2013,143 @@
                 
                 <!-- Ability Selection Rows -->
                 <div id="abilityRows">
-                    <!-- Dynamic rows will be added here by JavaScript -->
+                    <!-- Row 1 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 2 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 3 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 4 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 5 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 6 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 7 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
+                        </div>
+                    </div>
+    
+                    <!-- Row 8 -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-select ability-select">
+                                <option value="">Empty</option>
+                                <option value="Heal">Heal</option>
+                                <option value="Puncture">Puncture</option>
+                                <option value="Poke">Poke</option>
+                                <option value="Entangle">Entangle</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
+                        </div>
+                    </div>
                 </div>
-
+    
                 <button id="startAutomationButton" class="btn btn-secondary">Start Automation</button>
             </div>
         </div>
@@ -2038,13 +2172,94 @@
             </div>
         </div>
     </div>
+    
+    
+    
+
+
+
+
+
 
     <script>
-        // Define abilities and levels
+        // Define lists of abilities for each slot
         const abilities = ["Heal", "Puncture", "Poke", "Entangle", "Impale", "Frenzy"];
-        const levels = Array.from({length: 200}, (_, i) => i + 1); // Levels 1 to 200
-
-        // Function to generate permutations of an array of a specific length
+        const abilitylevels = []
+        // Initialize lists to hold the combinations
+        const abilitiesList1 = [];
+        const abilitiesList2 = [];
+        const abilitiesList3 = [];
+        const abilitiesList4 = [];
+        
+        const abilitiesLevelList1 = [];
+        const abilitiesLevelList2 = [];
+        const abilitiesLevelList3 = [];
+        const abilitiesLevelList4 = [];
+        
+        // Current index for each list
+        let currentIndex1 = 0;
+        let currentIndex2 = 0;
+        let currentIndex3 = 0;
+        let currentIndex4 = 0;
+        
+        function fillAbilities() {
+            // Find the select elements and set their selected options
+            let selectAbility1 = document.getElementById('selectAbility_1');
+            let selectAbility2 = document.getElementById('selectAbility_2');
+            let selectAbility3 = document.getElementById('selectAbility_3');
+            let selectAbility4 = document.getElementById('selectAbility_4');
+            
+            // Find the correct option and set it as selected
+            for (let i = 0; i < selectAbility1.options.length; i++) {
+                if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
+                    selectAbility1.options[i].selected = true;
+                    break;
+                }
+            }
+            
+            for (let i = 0; i < selectAbility2.options.length; i++) {
+                if (selectAbility2.options[i].text === abilitiesList2[currentIndex2]) {
+                    selectAbility2.options[i].selected = true;
+                    break;
+                }
+            }
+            
+            for (let i = 0; i < selectAbility3.options.length; i++) {
+                if (selectAbility3.options[i].text === abilitiesList3[currentIndex3]) {
+                    selectAbility3.options[i].selected = true;
+                    break;
+                }
+            }
+            
+            for (let i = 0; i < selectAbility4.options.length; i++) {
+                if (selectAbility4.options[i].text === abilitiesList4[currentIndex4]) {
+                    selectAbility4.options[i].selected = true;
+                    break;
+                }
+            }
+            
+            // Set the input values for ability levels
+            document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
+            document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
+            document.getElementById('inputAbilityLevel_3').value = abilitiesLevelList3[currentIndex3];
+            document.getElementById('inputAbilityLevel_4').value = abilitiesLevelList4[currentIndex4];
+            
+            // Increment indices for the next rotation
+            currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
+            currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
+            currentIndex3 = (currentIndex3 + 1) % abilitiesList3.length;
+            currentIndex4 = (currentIndex4 + 1) % abilitiesList4.length;
+        }
+        
+        function startSimulation() {
+            document.getElementById("buttonStartSimulation").click();
+            // Simulate starting the simulation
+            setTimeout(function() {
+    
+            }, 1000); // Simulating 1 second delay for the simulation to complete
+        }
+    
+        // Function to generate all permutations of length 4
         function permute(arr, len) {
             let result = [];
             function permuteRec(subArr, m = []) {
@@ -2061,81 +2276,30 @@
             permuteRec(arr);
             return result;
         }
-
-        // Generate all permutations of length 4 for abilities
-        const abilityPermutations = permute(abilities, 4);
-
-        // Generate all permutations of length 4 for levels
-        const levelPermutations = permute(levels, 4);
-
-        // Current index to keep track of permutations
-        let currentPermutationIndex = 0;
-
-        // Function to create ability selection rows
-        function createAbilityRows() {
-            const abilityRowsContainer = document.getElementById('abilityRows');
-            for (let i = 1; i <= 4; i++) {
-                const row = document.createElement('div');
-                row.className = 'row mb-3';
-                row.innerHTML = `
-                    <div class="col-md-6">
-                        <select class="form-select ability-select" id="selectAbility_${i}">
-                            <option value="">Empty</option>
-                            ${abilities.map(ability => `<option value="${ability}">${ability}</option>`).join('')}
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="number" class="form-control ability-level" id="inputAbilityLevel_${i}" value="1" min="1" max="200" required>
-                    </div>
-                `;
-                abilityRowsContainer.appendChild(row);
-            }
-        }
-
-        // Function to fill abilities and levels
-        function fillAbilitiesAndLevels() {
-            // Get current permutations
-            const currentAbilityPermutation = abilityPermutations[currentPermutationIndex % abilityPermutations.length];
-            const currentLevelPermutation = levelPermutations[currentPermutationIndex % levelPermutations.length];
-
-            for (let i = 0; i < 4; i++) {
-                document.getElementById(`selectAbility_${i + 1}`).value = currentAbilityPermutation[i];
-                document.getElementById(`inputAbilityLevel_${i + 1}`).value = currentLevelPermutation[i];
-            }
-
-            // Increment permutation index for next iteration
-            currentPermutationIndex++;
-        }
-
-        // Function to start simulation (dummy function to simulate behavior)
-        function startSimulation() {
-            console.log('Simulation started');
-            // Simulate adding results to table (replace with actual simulation logic)
-            const resultRow = document.createElement('tr');
-            resultRow.innerHTML = `
-                <th scope="row">${currentPermutationIndex}</th>
-                <td>Experience Gain</td>
-            `;
-            document.getElementById('simulationResultsTable').appendChild(resultRow);
-        }
-
-        // Function to process the next set of abilities and levels
-        function processNextSet() {
-            fillAbilitiesAndLevels();
-            startSimulation();
-            setTimeout(processNextSet, 3000); // Adjust the delay as needed
-        }
-
-        // Event listener for the start button
-        document.getElementById('startAutomationButton').addEventListener('click', function() {
-            // Clear existing table rows if any
-            document.getElementById('simulationResultsTable').innerHTML = '';
-            // Start processing abilities and levels
-            processNextSet();
+    
+        // Generate all combinations of length 4
+        const allPermutations = permute(abilities, 4);
+    
+        // Populate the lists with combinations
+        allPermutations.forEach(perm => {
+            abilitiesList1.push(perm[0]);
+            abilitiesList2.push(perm[1]);
+            abilitiesList3.push(perm[2]);
+            abilitiesList4.push(perm[3]);
         });
-
-        // Initialize ability rows on page load
-        createAbilityRows();
+        
+        function processNextAbilities() {
+            fillAbilities();
+            startSimulation();
+            setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
+        }
+        
+        document.getElementById("startAutomationButton").addEventListener("click", function() {
+            // Clear existing table rows if any
+            document.getElementById("simulationResultsTable").innerHTML = "";
+            // Start processing abilities
+            processNextAbilities();
+        });
     </script>
     
     
