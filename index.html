@@ -2263,7 +2263,7 @@
             
         }
 
-                // Function to generate all permutations of length 4
+        // Function to generate all permutations of length 4
         function permute(arr, len) {
             let result = [];
             function permuteRec(subArr, m = []) {
@@ -2283,12 +2283,6 @@
 
         // Generate all combinations of length 4
         const allPermutations = permute(abilities, 4);
-
-        // Initialize lists to hold the combinations
-        const abilitiesList1 = [];
-        const abilitiesList2 = [];
-        const abilitiesList3 = [];
-        const abilitiesList4 = [];
 
         // Populate the lists with combinations
         allPermutations.forEach(perm => {
