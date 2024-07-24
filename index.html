@@ -2026,7 +2026,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
                         </div>
                     </div>
     
@@ -2043,7 +2043,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
                         </div>
                     </div>
     
@@ -2060,7 +2060,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
                         </div>
                     </div>
     
@@ -2077,7 +2077,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
                         </div>
                     </div>
     
@@ -2094,7 +2094,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
                         </div>
                     </div>
     
@@ -2111,7 +2111,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
                         </div>
                     </div>
     
@@ -2128,7 +2128,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
                         </div>
                     </div>
     
@@ -2145,7 +2145,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <input type="number" class="form-control ability-level" value="1" min="1" max="400" required>
+                            <input type="number" class="form-control ability-level" value="1" min="1" max="200" required>
                         </div>
                     </div>
                 </div>
@@ -2183,10 +2183,14 @@
 
     <script>
         // Define lists of abilities for each slot
-        const abilitiesList1 = ["Heal", "Puncture", "Poke", "Entangle"];
-        const abilitiesList2 = ["Entangle", "Frenzy", "Impale", "Scratch"];
-        const abilitiesList3 = ["Fireball", "Firestorm", "Toughness", "Berserk"];
-        const abilitiesList4 = ["Smack", "Sweep", "Cleave", "Elusiveness"]; 
+
+        const abilities = ["Heal", "Puncture", "Poke", "Entangle", "Impale", "Frenzy"];
+
+        // Initialize lists to hold the combinations
+        const abilitiesList1 = [];
+        const abilitiesList2 = [];
+        const abilitiesList3 = [];
+        const abilitiesList4 = [];
         
         const abilitiesLevelList1 = ["1", "2", "3", "4"];
         const abilitiesLevelList2 = ["5", "6", "7", "8"];
@@ -2270,7 +2274,7 @@
         document.getElementById("startAutomationButton").addEventListener("click", function() {
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
-        
+            permute()
             // Start processing abilities
             processNextAbilities();
         });

@@ -2156,6 +2156,46 @@ function updateSimulationResultsTable(totalExperiencePerHour) {
 }
 
 
+
+
+// Function to generate all permutations of length 4
+function permute(arr, len) {
+    let result = [];
+    function permuteRec(subArr, m = []) {
+        if (m.length === len) {
+            result.push(m);
+            return;
+        }
+        for (let i = 0; i < subArr.length; i++) {
+            let current = subArr.slice();
+            let next = current.splice(i, 1);
+            permuteRec(current.slice(), m.concat(next));
+        }
+    }
+    permuteRec(arr);
+    return result;
+}
+
+// Generate all combinations of length 4
+const allPermutations = permute(abilities, 4);
+
+// Initialize lists to hold the combinations
+const abilitiesList1 = [];
+const abilitiesList2 = [];
+const abilitiesList3 = [];
+const abilitiesList4 = [];
+
+// Populate the lists with combinations
+allPermutations.forEach(perm => {
+    abilitiesList1.push(perm[0]);
+    abilitiesList2.push(perm[1]);
+    abilitiesList3.push(perm[2]);
+    abilitiesList4.push(perm[3]);
+});
+
+
+
+
 // #endregion
 
 function updateState() {
