@@ -2309,6 +2309,7 @@
         
         function processNextAbilities() {
             fillAbilities();
+            fillAbilitiesLevel();
             startSimulation();
             setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
         }
