@@ -2228,28 +2228,28 @@
             
             // Find the correct option and set it as selected
             for (let i = 0; i < selectAbilityLevel1.options.length; i++) {
-                if (selectAbilityLevel1.options[i].text === abilitiesLevelList1[currentIndex1]) {
+                if (selectAbilityLevel1.options[i].text === abilitiesLevelList1[currentIndexLevels1]) {
                     selectAbilityLevel1.options[i].selected = true;
                     break;
                 }
             }
             
             for (let i = 0; i < selectAbilityLevel2.options.length; i++) {
-                if (selectAbilityLevel2.options[i].text === abilitiesLevelList2[currentIndex2]) {
+                if (selectAbilityLevel2.options[i].text === abilitiesLevelList2[currentIndexLevels2]) {
                     selectAbilityLevel2.options[i].selected = true;
                     break;
                 }
             }
             
             for (let i = 0; i < selectAbilityLevel3.options.length; i++) {
-                if (selectAbilityLevel3.options[i].text === abilitiesLevelList3[currentIndex3]) {
+                if (selectAbilityLevel3.options[i].text === abilitiesLevelList3[currentIndexLevels3]) {
                     selectAbilityLevel3.options[i].selected = true;
                     break;
                 }
             }
             
             for (let i = 0; i < selectAbilityLevel4.options.length; i++) {
-                if (selectAbilityLevel4.options[i].text === abilitiesLevelList4[currentIndex4]) {
+                if (selectAbilityLevel4.options[i].text === abilitiesLevelList4[currentIndexLevels4]) {
                     selectAbilityLevel4.options[i].selected = true;
                     break;
                 }
@@ -2257,10 +2257,10 @@
             
             
             // Increment indices for the next rotation
-            currentIndex1 = (currentIndex1 + 1) % abilitiesLevelList1.length;
-            currentIndex2 = (currentIndex2 + 1) % abilitiesLevelList2.length;
-            currentIndex3 = (currentIndex3 + 1) % abilitiesLevelList3.length;
-            currentIndex4 = (currentIndex4 + 1) % abilitiesLevelList4.length;
+            currentIndexLevels1 = (currentIndexLevels1 + 1) % abilitiesLevelList1.length;
+            currentIndexLevels2 = (currentIndexLevels2 + 1) % abilitiesLevelList2.length;
+            currentIndexLevels3 = (currentIndexLevels3 + 1) % abilitiesLevelList3.length;
+            currentIndexLevels4 = (currentIndexLevels4 + 1) % abilitiesLevelList4.length;
             
             
         }
