@@ -2155,7 +2155,7 @@ function updateSimulationResultsTable(totalExperiencePerHour) {
     table.parentNode.scrollTop = table.parentNode.scrollHeight;
 }
 
-
+initAbilitiesSectionAutomate(); // AUTOMATION
 
 
 // #endregion
@@ -2208,6 +2208,7 @@ initSimulationControls();
 initEquipmentSetsModal();
 initErrorHandling();
 initImportExportModal();
+
 
 updateState();
 updateUI();

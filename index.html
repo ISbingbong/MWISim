@@ -2166,19 +2166,46 @@
         const abilitiesLevelList3 = [];
         const abilitiesLevelList4 = [];
         
-        // Current index for each list
+        // Ability levels current index for each list
         let currentIndex1 = 0;
         let currentIndex2 = 0;
         let currentIndex3 = 0;
         let currentIndex4 = 0;
 
-        // Current index for each list
+        // Ability levels current index for each list
         let currentIndexLevels1 = 0;
         let currentIndexLevels2 = 0;
         let currentIndexLevels3 = 0;
         let currentIndexLevels4 = 0;
 
         
+        function initAbilitiesSectionAutomate() {
+            for (let i = 10; i < 18; i++) {
+                let selectElement = document.getElementById("selectAbility_" + i);
+                 let inputElement = document.getElementById("inputAbilityLevel_" + i);
+
+                inputElement.value = 1;
+
+                let gameAbilities;
+                if (i == 0) {
+                    gameAbilities = Object.values(abilityDetailMap).filter(x => x.isSpecialAbility && x.name !== "Promote").sort((a, b) => a.sortIndex - b.sortIndex);
+                } else {
+                    gameAbilities = Object.values(abilityDetailMap).filter(x => !x.isSpecialAbility).sort((a, b) => a.sortIndex - b.sortIndex);
+                }
+
+
+                for (const ability of Object.values(gameAbilities)) {
+                    selectElement.add(new Option(ability.name, ability.hrid));
+                }
+
+                selectElement.addEventListener("change", abilitySelectHandler);
+            }
+}
+
+
+
+
+
         // ABILITIES
         function fillAbilities() {
             // Find the select elements and set their selected options
