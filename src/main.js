@@ -2136,6 +2136,30 @@ function updateTable(tableId, item, price) {
 // region automation
 
 
+function initAbilitiesSectionAutomate() {
+    for (let i = 10; i < 17; i++) {
+        let selectElement = document.getElementById("selectAbility_" + i);
+        let inputElement = document.getElementById("inputAbilityLevel_" + i);
+
+        inputElement.value = 1;
+
+        let gameAbilities;
+        if (i == 0) {
+            gameAbilities = Object.values(abilityDetailMap).filter(x => x.isSpecialAbility && x.name !== "Promote").sort((a, b) => a.sortIndex - b.sortIndex);
+        } else {
+            gameAbilities = Object.values(abilityDetailMap).filter(x => !x.isSpecialAbility).sort((a, b) => a.sortIndex - b.sortIndex);
+        }
+
+
+        for (const ability of Object.values(gameAbilities)) {
+            selectElement.add(new Option(ability.name, ability.hrid));
+        }
+
+        selectElement.addEventListener("change", abilitySelectHandler);
+    }
+}
+
+
 function updateSimulationResultsTable(totalExperiencePerHour) {
     // Create a new row in the table
     let table = document.getElementById("simulationResultsTable");
