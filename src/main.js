@@ -2143,14 +2143,8 @@ function initAbilitiesSectionAutomate() {
 
         inputElement.value = 1;
 
-        let gameAbilities;
-        if (i == 0) {
-            gameAbilities = Object.values(abilityDetailMap).filter(x => x.isSpecialAbility && x.name !== "Promote").sort((a, b) => a.sortIndex - b.sortIndex);
-        } else {
-            gameAbilities = Object.values(abilityDetailMap).filter(x => !x.isSpecialAbility).sort((a, b) => a.sortIndex - b.sortIndex);
-        }
-
-
+        let gameAbilities = Object.values(abilityDetailMap).filter(x => !x.isSpecialAbility).sort((a, b) => a.sortIndex - b.sortIndex);
+        
         for (const ability of Object.values(gameAbilities)) {
             selectElement.add(new Option(ability.name, ability.hrid));
         }
@@ -2158,6 +2152,30 @@ function initAbilitiesSectionAutomate() {
         selectElement.addEventListener("change", abilitySelectHandler);
     }
 }
+
+function updateAbilityState() {
+    for (let i = 10; i < 17; i++) {
+        let abilitySelect = document.getElementById("selectAbility_" + i);
+        abilities[i] = abilitySelect.value;
+        if (abilities[i] && !triggerMap[abilities[i]]) {
+            let gameAbility = abilityDetailMap[abilities[i]];
+            triggerMap[abilities[i]] = structuredClone(gameAbility.defaultCombatTriggers);
+        }
+    }
+}
+
+function updateAbilityUI() {
+    for (let i = 10; i < 17; i++) {
+        let selectElement = document.getElementById("selectAbility_" + i);
+        let inputElement = document.getElementById("inputAbilityLevel_" + i);
+        let triggerButton = document.getElementById("buttonAbilityTrigger_" + i);
+
+        selectElement.disabled = player.intelligenceLevel < abilitySlotsLevelRequirementList[i + 1];
+        inputElement.disabled = player.intelligenceLevel < abilitySlotsLevelRequirementList[i + 1];
+        triggerButton.disabled = player.intelligenceLevel < abilitySlotsLevelRequirementList[i + 1] || !abilities[i];
+    }
+}
+
 
 
 function updateSimulationResultsTable(totalExperiencePerHour) {

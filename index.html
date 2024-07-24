@@ -2147,11 +2147,15 @@
     
 
 
-
+    
 
 
 
     <script>
+
+        // NOTES CHECK HVORFOR DET HER IKKE VIRKER?? initAbilitiesSectionAutomated()
+
+
         // Define lists of abilities for each slot
         const abilities = ["Heal", "Puncture", "Poke", "Entangle", "Impale", "Frenzy"];
         const abilitylevels = [32, 65, 12, 23, 34, 45];
@@ -2179,33 +2183,6 @@
         let currentIndexLevels4 = 0;
 
         
-        function initAbilitiesSectionAutomate() {
-            for (let i = 10; i < 18; i++) {
-                let selectElement = document.getElementById("selectAbility_" + i);
-                 let inputElement = document.getElementById("inputAbilityLevel_" + i);
-
-                inputElement.value = 1;
-
-                let gameAbilities;
-                if (i == 0) {
-                    gameAbilities = Object.values(abilityDetailMap).filter(x => x.isSpecialAbility && x.name !== "Promote").sort((a, b) => a.sortIndex - b.sortIndex);
-                } else {
-                    gameAbilities = Object.values(abilityDetailMap).filter(x => !x.isSpecialAbility).sort((a, b) => a.sortIndex - b.sortIndex);
-                }
-
-
-                for (const ability of Object.values(gameAbilities)) {
-                    selectElement.add(new Option(ability.name, ability.hrid));
-                }
-
-                selectElement.addEventListener("change", abilitySelectHandler);
-            }
-}
-
-
-
-
-
         // ABILITIES
         function fillAbilities() {
             // Find the select elements and set their selected options
