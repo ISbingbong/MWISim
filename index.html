@@ -2143,7 +2143,7 @@
     <script>
         // Define lists of abilities for each slot
         const abilities = ["Heal", "Puncture", "Poke", "Entangle", "Impale", "Frenzy"];
-        const abilitylevels = []
+        const abilitylevels = [32, 65, 12, 23, 34, 45];
         // Initialize lists to hold the combinations
         const abilitiesList1 = [];
         const abilitiesList2 = [];
@@ -2161,6 +2161,7 @@
         let currentIndex3 = 0;
         let currentIndex4 = 0;
         
+        // ABILITIES
         function fillAbilities() {
             // Find the select elements and set their selected options
             let selectAbility1 = document.getElementById('selectAbility_1');
@@ -2197,11 +2198,6 @@
                 }
             }
             
-            // Set the input values for ability levels
-            document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndex1];
-            document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndex2];
-            document.getElementById('inputAbilityLevel_3').value = abilitiesLevelList3[currentIndex3];
-            document.getElementById('inputAbilityLevel_4').value = abilitiesLevelList4[currentIndex4];
             
             // Increment indices for the next rotation
             currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
@@ -2209,6 +2205,56 @@
             currentIndex3 = (currentIndex3 + 1) % abilitiesList3.length;
             currentIndex4 = (currentIndex4 + 1) % abilitiesList4.length;
         }
+
+        // ABILITY LEVELS
+
+        function fillAbilitiesLevel() {
+            // Find the select elements and set their selected options
+            let selectAbilityLevel1 = document.getElementById('inputAbilityLevel_1');
+            let selectAbilityLevel2 = document.getElementById('inputAbilityLevel_2');
+            let selectAbilityLevel3 = document.getElementById('inputAbilityLevel_3');
+            let selectAbilityLevel4 = document.getElementById('inputAbilityLevel_4');
+            
+            // Find the correct option and set it as selected
+            for (let i = 0; i < selectAbilityLevel1.options.length; i++) {
+                if (selectAbilityLevel1.options[i].text === abilitiesLevelList1[currentIndex1]) {
+                    selectAbilityLevel1.options[i].selected = true;
+                    break;
+                }
+            }
+            
+            for (let i = 0; i < selectAbilityLevel2.options.length; i++) {
+                if (selectAbilityLevel2.options[i].text === abilitiesLevelList2[currentIndex2]) {
+                    selectAbilityLevel2.options[i].selected = true;
+                    break;
+                }
+            }
+            
+            for (let i = 0; i < selectAbilityLevel3.options.length; i++) {
+                if (selectAbilityLevel3.options[i].text === abilitiesLevelList3[currentIndex3]) {
+                    selectAbilityLevel3.options[i].selected = true;
+                    break;
+                }
+            }
+            
+            for (let i = 0; i < selectAbilityLevel4.options.length; i++) {
+                if (selectAbilityLevel4.options[i].text === abilitiesLevelList4[currentIndex4]) {
+                    selectAbilityLevel4.options[i].selected = true;
+                    break;
+                }
+            }
+            
+            
+            // Increment indices for the next rotation
+            currentIndex1 = (currentIndex1 + 1) % abilitiesLevelList1.length;
+            currentIndex2 = (currentIndex2 + 1) % abilitiesLevelList2.length;
+            currentIndex3 = (currentIndex3 + 1) % abilitiesLevelList3.length;
+            currentIndex4 = (currentIndex4 + 1) % abilitiesLevelList4.length;
+            
+            
+
+
+
         
         function startSimulation() {
             document.getElementById("buttonStartSimulation").click();
@@ -2218,7 +2264,10 @@
             }, 1000); // Simulating 1 second delay for the simulation to complete
         }
     
-        // Function to generate all permutations of length 4
+
+        // PERMUTATIONS
+
+        // Function to generate all ability permutations of length 4
         function permute(arr, len) {
             let result = [];
             function permuteRec(subArr, m = []) {
@@ -2253,6 +2302,46 @@
             setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
         }
         
+
+        // Function to generate all ability level permutations of length 4
+        function permuteLevel(arr, len) {
+            let result = [];
+            function permuteRec(subArr, m = []) {
+                if (m.length === len) {
+                    result.push(m);
+                    return;
+                }
+                for (let i = 0; i < subArr.length; i++) {
+                    let current = subArr.slice();
+                    let next = current.splice(i, 1);
+                    permuteRec(current.slice(), m.concat(next));
+                }
+            }
+            permuteRec(arr);
+            return result;
+        }
+    
+        // Generate all combinations of length 4
+        const allPermutationsLevel = permuteLevel(abilitylevels, 4);
+    
+        // Populate the lists with combinations
+        allPermutationsLevel.forEach(perm => {
+            abilitiesLevelList1.push(perm[0]);
+            abilitiesLevelList2.push(perm[1]);
+            abilitiesLevelList3.push(perm[2]);
+            abilitiesLevelList4.push(perm[3]);
+        });
+        
+        function processNextAbilities() {
+            fillAbilities();
+            startSimulation();
+            setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
+        }
+
+
+
+
+
         document.getElementById("startAutomationButton").addEventListener("click", function() {
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
