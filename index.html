@@ -2175,12 +2175,19 @@
         // ABILITIES
         function fillAbilities() {
             // Find the select elements and set their selected options
+            // Abilities
             let selectAbility1 = document.getElementById('selectAbility_1');
             let selectAbility2 = document.getElementById('selectAbility_2');
             let selectAbility3 = document.getElementById('selectAbility_3');
             let selectAbility4 = document.getElementById('selectAbility_4');
+
+            // Ability Levels
+            let selectAbilityLevel1 = document.getElementById('inputAbilityLevel_1');
+            let selectAbilityLevel2 = document.getElementById('inputAbilityLevel_2');
+            let selectAbilityLevel3 = document.getElementById('inputAbilityLevel_3');
+            let selectAbilityLevel4 = document.getElementById('inputAbilityLevel_4');
             
-            // Find the correct option and set it as selected
+            // Find the correct ability option and set it as selected
             for (let i = 0; i < selectAbility1.options.length; i++) {
                 if (selectAbility1.options[i].text === abilitiesList1[currentIndex1]) {
                     selectAbility1.options[i].selected = true;
@@ -2209,24 +2216,7 @@
                 }
             }
             
-            
-            // Increment indices for the next rotation
-            currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
-            currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
-            currentIndex3 = (currentIndex3 + 1) % abilitiesList3.length;
-            currentIndex4 = (currentIndex4 + 1) % abilitiesList4.length;
-        }
-
-        // ABILITY LEVELS
-
-        function fillAbilitiesLevel() {
-            // Find the select elements and set their selected options
-            let selectAbilityLevel1 = document.getElementById('inputAbilityLevel_1');
-            let selectAbilityLevel2 = document.getElementById('inputAbilityLevel_2');
-            let selectAbilityLevel3 = document.getElementById('inputAbilityLevel_3');
-            let selectAbilityLevel4 = document.getElementById('inputAbilityLevel_4');
-            
-            // Find the correct option and set it as selected
+            // Find the correct ability level option and set it as selected
             for (let i = 0; i < selectAbilityLevel1.options.length; i++) {
                 if (selectAbilityLevel1.options[i].text === abilitiesLevelList1[currentIndex1]) {
                     selectAbilityLevel1.options[i].selected = true;
@@ -2255,17 +2245,12 @@
                 }
             }
             
-            
             // Increment indices for the next rotation
-            currentIndex1 = (currentIndex1 + 1) % abilitiesLevelList1.length;
-            currentIndex2 = (currentIndex2 + 1) % abilitiesLevelList2.length;
-            currentIndex3 = (currentIndex3 + 1) % abilitiesLevelList3.length;
-            currentIndex4 = (currentIndex4 + 1) % abilitiesLevelList4.length;
-            
-            
+            currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
+            currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
+            currentIndex3 = (currentIndex3 + 1) % abilitiesList3.length;
+            currentIndex4 = (currentIndex4 + 1) % abilitiesList4.length;
         }
-
-
         
         function startSimulation() {
             document.getElementById("buttonStartSimulation").click();
@@ -2339,7 +2324,6 @@
         
         function processNextAbilities() {
             fillAbilities();
-            fillAbilitiesLevel();
             startSimulation();
             setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
         }
