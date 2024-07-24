@@ -2220,40 +2220,12 @@
         // ABILITY LEVELS
 
         function fillAbilitiesLevel() {
-            // Find the select elements and set their selected options
-            let selectAbilityLevel1 = document.getElementById('inputAbilityLevel_1').value;
-            let selectAbilityLevel2 = document.getElementById('inputAbilityLevel_2').value;
-            let selectAbilityLevel3 = document.getElementById('inputAbilityLevel_3').value;
-            let selectAbilityLevel4 = document.getElementById('inputAbilityLevel_4').value;
-            
-            // Find the correct option and set it as selected
-            for (let i = 0; i < selectAbilityLevel1.options.length; i++) {
-                if (selectAbilityLevel1.options[i].value === abilitiesLevelList1[currentIndexLevels1]) {
-                    selectAbilityLevel1.options[i].selected = true;
-                    break;
-                }
-            }
-            
-            for (let i = 0; i < selectAbilityLevel2.options.length; i++) {
-                if (selectAbilityLevel2.options[i].value === abilitiesLevelList2[currentIndexLevels2]) {
-                    selectAbilityLevel2.options[i].selected = true;
-                    break;
-                }
-            }
-            
-            for (let i = 0; i < selectAbilityLevel3.options.length; i++) {
-                if (selectAbilityLevel3.options[i].value === abilitiesLevelList3[currentIndexLevels3]) {
-                    selectAbilityLevel3.options[i].selected = true;
-                    break;
-                }
-            }
-            
-            for (let i = 0; i < selectAbilityLevel4.options.length; i++) {
-                if (selectAbilityLevel4.options[i].value === abilitiesLevelList4[currentIndexLevels4]) {
-                    selectAbilityLevel4.options[i].selected = true;
-                    break;
-                }
-            }
+
+            // Set the input values for ability levels
+            document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndexLevels1];
+            document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndexLevels2];
+            document.getElementById('inputAbilityLevel_3').value = abilitiesLevelList3[currentIndexLevels3];
+            document.getElementById('inputAbilityLevel_4').value = abilitiesLevelList4[currentIndexLevels4];
             
             
             // Increment indices for the next rotation
