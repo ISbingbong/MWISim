@@ -2307,13 +2307,6 @@
             abilitiesList4.push(perm[3]);
         });
         
-        function processNextAbilities() {
-            fillAbilities();
-            fillAbilitiesLevel();
-            startSimulation();
-            setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
-        }
-        
 
         // Function to generate all ability level permutations of length 4
         function permuteLevel(arr, len) {
@@ -2346,6 +2339,7 @@
         
         function processNextAbilities() {
             fillAbilities();
+            fillAbilitiesLevel();
             startSimulation();
             setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
         }
