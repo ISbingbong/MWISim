@@ -812,7 +812,7 @@ function showSimulationResult(simResult) {
     showKills(simResult);
     showDeaths(simResult);
     showExperienceGained(simResult);
-    updateSimulationResultsTables(totalExperiencePerHour); // AUTOMATION
+    updateSimulationResultsTable(totalExperiencePerHour); // AUTOMATION
     showConsumablesUsed(simResult);
     showHpSpent(simResult);
     showManaUsed(simResult);
@@ -2136,31 +2136,7 @@ function updateTable(tableId, item, price) {
 // region automation
 
 
-function populateAbilityDropdown() {
-    fetch("./data/abilityDetailMap.json")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error loading JSON');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const abilityDropdown = document.getElementById('selectAbility_10');
-            if (!abilityDropdown) {
-                throw new Error('Element with id "selectAbility_10" not found');
-            }
-            for (const key in data) {
-                if (data.hasOwnProperty(key)) {
-                    const ability = data[key];
-                    const option = document.createElement('option');
-                    option.value = key;
-                    option.textContent = ability.name;
-                    abilityDropdown.appendChild(option);
-                }
-            }
-        })
-        .catch(error => console.error('Error:', error.message));
-}
+
 
 
 
@@ -2176,6 +2152,11 @@ function updateSimulationResultsTable(totalExperiencePerHour) {
     let indexCell = newRow.insertCell(0);
     let experienceCell = newRow.insertCell(1);
 
+    let hoursSimulated = simResult.simulatedTime / ONE_HOUR;
+
+    let totalExperience = Object.values(simResult.experienceGained["player"]).reduce((prev, cur) => prev + cur, 0);
+    let totalExperiencePerHour = (totalExperience / hoursSimulated).toFixed(0);
+    
     // Populate cells with data
     indexCell.textContent = table.rows.length - 1; // Row index
     experienceCell.textContent = totalExperiencePerHour; // Simulation result
@@ -2226,9 +2207,7 @@ darkModeToggle.addEventListener('change', () => {
     localStorage.setItem('darkModeEnabled', darkModeToggle.checked);
 });
 
-populateAbilityDropdown(); // AUTOMATION
-initAbilitiesSectionAutomate(); // AUTOMATION
-updateAbilityStateAutomate(); // AUTOMATION
+
 initEquipmentSection();
 initHouseRoomsModal();
 initLevelSection();
