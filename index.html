@@ -2297,31 +2297,6 @@
 
         }
 
-
-
-
-
-        document.getElementById("startAutomationButton").addEventListener("click", function() {
-            // Clear existing table rows if any
-            document.getElementById("simulationResultsTable").innerHTML = "";
-            listFiller()
-                .then(() => {
-                    permuteStart();
-                    processNextAbilities();
-                    console.log('Abilities:', abilities); // Logs all abilities
-                    console.log('Ability Levels:', abilityLevels); // Logs all levels
-                    console.log('Ability Levels:', abilitiesList1);
-                    console.log('Ability Levels:', abilitiesList2);
-                    console.log('Ability Levels:', abilitiesList3);
-                    console.log('Ability Levels:', abilitiesList4);
-                    console.log('Ability Levels:', abilitiesLevelList1);
-                    console.log('Ability Levels:', abilitiesLevelList2);
-                    console.log('Ability Levels:', abilitiesLevelList3);
-                    console.log('Ability Levels:', abilitiesLevelList4);
-                })
-                .catch(error => console.error('Error in listFiller:', error));
-        });
-
         function listFiller() {
             // Fill the lists with the selected abilities and levels
             for (let i = 10; i <= 18; i++) { // Adjust the range based on your number of rows
@@ -2415,6 +2390,31 @@
             });
 
         }
+
+
+        document.getElementById("startAutomationButton").addEventListener("click", function() {
+            // Clear existing table rows if any
+            document.getElementById("simulationResultsTable").innerHTML = "";
+            listFiller()
+                .then(() => {
+                    permuteStart();
+                    processNextAbilities();
+                    console.log('Abilities:', abilities); // Logs all abilities
+                    console.log('Ability Levels:', abilityLevels); // Logs all levels
+                    console.log('Ability Levels:', abilitiesList1);
+                    console.log('Ability Levels:', abilitiesList2);
+                    console.log('Ability Levels:', abilitiesList3);
+                    console.log('Ability Levels:', abilitiesList4);
+                    console.log('Ability Levels:', abilitiesLevelList1);
+                    console.log('Ability Levels:', abilitiesLevelList2);
+                    console.log('Ability Levels:', abilitiesLevelList3);
+                    console.log('Ability Levels:', abilitiesLevelList4);
+                })
+                .catch(error => console.error('Error in listFiller:', error));
+        });
+
+
+
     </script>
     
     
