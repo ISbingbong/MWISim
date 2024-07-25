@@ -3647,7 +3647,7 @@ function updateSimulationResultsTable(totalExperiencePerHour) {
 
     // Scroll to the bottom of the table
     table.parentNode.scrollTop = table.parentNode.scrollHeight;
-}
+};
 
 // Populate ability dropdown
 document.addEventListener('DOMContentLoaded', populateAbilityDropdown);
