@@ -2225,9 +2225,9 @@ function updateSimulationResultsTable(simResult) {
     indexCell.textContent = table.rows.length - 1; // Row index
     experienceCell.textContent = totalExperiencePerHourAutomation; // Simulation result
     abilityCell1.textContent = abilitiesList1[currentIndex1]; // Ability 1 name
-    abilityCell2.textContent = abilitiesList2[currentIndex2]; // Ability 2 name
-    abilityCell3.textContent = abilitiesList3[currentIndex3]; // Ability 3 name
-    abilityCell4.textContent = abilitiesList4[currentIndex4]; // Ability 4 name
+    abilityCell2.textContent = abilitiesList2[currentIndex1]; // Ability 2 name
+    abilityCell3.textContent = abilitiesList3[currentIndex1]; // Ability 3 name
+    abilityCell4.textContent = abilitiesList4[currentIndex1]; // Ability 4 name
 
     // Optionally, you can format the experienceCell content or add additional columns as needed
 
