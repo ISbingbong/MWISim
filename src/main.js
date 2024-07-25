@@ -812,6 +812,7 @@ function showSimulationResult(simResult) {
     showKills(simResult);
     showDeaths(simResult);
     showExperienceGained(simResult);
+    updateSimulationResultsTable(simResult);
     showConsumablesUsed(simResult);
     showHpSpent(simResult);
     showManaUsed(simResult);
