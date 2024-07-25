@@ -2194,17 +2194,25 @@
                 const abilityLevel = document.getElementById(`inputAbilityLevel_${i}`);
 
                 if (abilitySelect && abilityLevel) {
-                    const ability = abilitySelect.value;
+                    const abilityKey = abilitySelect.value; // Get the key of the selected ability
                     const level = abilityLevel.value;
-                    if (ability) { // Ensure only non-empty abilities are added
-                        abilities.push(ability);
-                        abilityLevels.push(parseInt(level));
+                    if (abilityKey) { // Ensure only non-empty abilities are added
+                        // Extract the ability name from the JSON data using the abilityKey
+                        fetch("./src/combatsimulator/data/abilityDetailMap.json")
+                            .then(response => response.json())
+                            .then(data => {
+                                const abilityName = data[abilityKey].name; // Get the name from the JSON data
+                                abilities.push(abilityName);
+                                abilityLevels.push(parseInt(level));
+                                if (abilities.length === (17 - 10 + 1)) { // Ensure all abilities are processed
+                                    console.log('Abilities:', abilities); // Logs all abilities
+                                    console.log('Ability Levels:', abilityLevels); // Logs all levels
+                                }
+                            })
+                            .catch(error => console.error('Error:', error.message));
                     }
                 }
             }
-
-            console.log('Abilities:', abilities); // Logs all abilities
-            console.log('Ability Levels:', abilityLevels); // Logs all levels
         });
 
         // Define lists of abilities for each slot
