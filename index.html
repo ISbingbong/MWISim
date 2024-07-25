@@ -2276,14 +2276,7 @@
         }
 
 
-        
-        function startSimulation() {
-            document.getElementById("buttonStartSimulation").click();
-            // Simulate starting the simulation
-            setTimeout(function() {
-    
-            }, 1000); // Simulating 1 second delay for the simulation to complete
-        }
+
     
 
         function processNextAbilities() {
@@ -2394,6 +2387,7 @@
             listFiller();
             setTimeout(() => {console.log('Wait 2 seconds');}, 2000);
             permuteStart();
+            setTimeout(() => {console.log('Wait 2 seconds');}, 2000);
             permuteStart();
             processNextAbilities();
             console.log('Abilities:', abilities); // Logs all abilities
