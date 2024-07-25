@@ -2153,7 +2153,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', populateAbilityDropdown);
-        // NOTES CHECK HVORFOR DET HER IKKE VIRKER?? initAbilitiesSectionAutomated()
+
         function populateAbilityDropdown() {
             fetch("./src/combatsimulator/data/abilityDetailMap.json")
                 .then(response => {
@@ -2163,22 +2163,26 @@
                     return response.json();
                 })
                 .then(data => {
-                    const abilityDropdown = document.getElementById('selectAbility_10');
-                    if (!abilityDropdown) {
-                        throw new Error('Element with id "selectAbility_10" not found');
-                    }
-                    for (const key in data) {
-                        if (data.hasOwnProperty(key)) {
-                            const ability = data[key];
-                            const option = document.createElement('option');
-                            option.value = key;
-                            option.textContent = ability.name;
-                            abilityDropdown.appendChild(option);
+                    for (let i = 10; i <= 17; i++) {
+                        const abilityDropdown = document.getElementById(`selectAbility_${i}`);
+                        if (!abilityDropdown) {
+                            console.error(`Element with id "selectAbility_${i}" not found`);
+                            continue;
+                        }
+                        for (const key in data) {
+                            if (data.hasOwnProperty(key)) {
+                                const ability = data[key];
+                                const option = document.createElement('option');
+                                option.value = key;
+                                option.textContent = ability.name;
+                                abilityDropdown.appendChild(option);
+                            }
                         }
                     }
                 })
                 .catch(error => console.error('Error:', error.message));
         }
+
 
         // Define lists of abilities for each slot
         const abilities = ["Heal", "Puncture", "Poke", "Entangle", "Impale", "Frenzy"];
