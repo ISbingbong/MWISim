@@ -812,7 +812,7 @@ function showSimulationResult(simResult) {
     showKills(simResult);
     showDeaths(simResult);
     showExperienceGained(simResult);
-    updateSimulationResultsTable(totalExperiencePerHour); // AUTOMATION
+    updateSimulationResultsTable(simResult); // AUTOMATION
     showConsumablesUsed(simResult);
     showHpSpent(simResult);
     showManaUsed(simResult);
