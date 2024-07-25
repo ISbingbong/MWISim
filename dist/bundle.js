@@ -3674,7 +3674,7 @@ function updateSimulationResultsTable(simResult) {
     // Populate cells with data
     indexCell.textContent = table.rows.length - 1; // Row index
     experienceCell.textContent = totalExperiencePerHourAutomation; // Simulation result
-    abilityCell1.textContent = abilitiesList1[currentIndex1] // Ability 1 name
+    abilityCell1.textContent = abilitiesList1[currentIndex1]; // Ability 1 name
 
     // Optionally, you can format the experienceCell content or add additional columns as needed
 
