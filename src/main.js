@@ -2138,9 +2138,18 @@ function updateTable(tableId, item, price) {
 
 document.addEventListener('DOMContentLoaded', function() {
     fetch(".data/abilityDetailMap.json")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error loading JSON');
+            }
+            return response.json();
+        })
         .then(response => response.json())
         .then(data => {
             const abilityDropdown = document.getElementById('selectAbility_10');
+            if (!abilityDropdown) {
+                throw new Error('Element with id "selectAbility_10" not found');
+            }
             for (const key in data) {
                 if (data.hasOwnProperty(key)) {
                     const ability = data[key];
@@ -2151,6 +2160,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         })
+        .catch(error => console.error(error.message));
         .catch(error => console.error('Error loading JSON:', error));
 });
 
