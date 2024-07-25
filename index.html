@@ -2152,6 +2152,7 @@
 
 
     <script>
+        // Populate ability dropdown
         document.addEventListener('DOMContentLoaded', populateAbilityDropdown);
 
         function populateAbilityDropdown() {
@@ -2183,10 +2184,29 @@
                 .catch(error => console.error('Error:', error.message));
         }
 
+        // Add event listener to the "Start Automation" button
+        document.getElementById('startAutomationButton').addEventListener('click', function() {
+            const abilities = [];
+
+            for (let i = 10; i <= 17; i++) { // Adjust the range based on your number of rows
+                const abilitySelect = document.getElementById(`selectAbility_${i}`);
+                const abilityLevel = document.getElementById(`inputAbilityLevel_${i}`);
+
+                if (abilitySelect && abilityLevel) {
+                    const ability = abilitySelect.value;
+                    const level = abilityLevel.value;
+                    if (ability) { // Ensure only non-empty abilities are added
+                        abilities.push({ ability, level: parseInt(level) });
+                    }
+                }
+            }
+
+            console.log(abilities); // Do something with the abilities array
+        });
 
         // Define lists of abilities for each slot
-        const abilities = ["Heal", "Puncture", "Poke", "Entangle", "Impale", "Frenzy"];
-        const abilitylevels = [32, 65, 12, 23, 34, 45];
+        const abilities = [];
+        const abilitylevels = [];
         // Initialize lists to hold the combinations
         const abilitiesList1 = [];
         const abilitiesList2 = [];
