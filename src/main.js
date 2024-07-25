@@ -2137,7 +2137,7 @@ function updateTable(tableId, item, price) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetch(abilityDetailMap)
+    fetch("./combatsimulator/data/abilityDetailMap.json")
         .then(response => response.json())
         .then(data => {
             const abilityDropdown = document.getElementById('selectAbility_10');
