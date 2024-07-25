@@ -2155,7 +2155,7 @@
         document.addEventListener('DOMContentLoaded', populateAbilityDropdown);
         // NOTES CHECK HVORFOR DET HER IKKE VIRKER?? initAbilitiesSectionAutomated()
         function populateAbilityDropdown() {
-            fetch("./data/abilityDetailMap.json")
+            fetch("./src/combatsimulator/data/abilityDetailMap.json")
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Error loading JSON');
