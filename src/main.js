@@ -2353,7 +2353,7 @@ function checkProgressAndContinue() {
         processNextAbilities();
     } else {
         // Check again after a short delay
-        setTimeout(checkProgressAndContinue, 100); // Check every 100ms
+        setTimeout(checkProgressAndContinue, 500); // Check every 100ms
     }
 }
 
