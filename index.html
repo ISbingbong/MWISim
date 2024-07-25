@@ -2304,10 +2304,13 @@
         document.getElementById("startAutomationButton").addEventListener("click", function() {
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
-            
+            listFiller();
+            permuteStart();
+
+        });
+
+        function listFiller() {
             // Fill the lists with the selected abilities and levels
-
-
             for (let i = 10; i <= 18; i++) { // Adjust the range based on your number of rows
                 const abilitySelect = document.getElementById(`selectAbility_${i}`);
                 const abilityLevel = document.getElementById(`inputAbilityLevel_${i}`);
@@ -2332,10 +2335,7 @@
                     }
                 }
             }
-            permuteStart();
-
-        });
-
+        }
 
         function permuteStart() {
             
