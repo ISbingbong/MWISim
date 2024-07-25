@@ -3663,7 +3663,7 @@ function updateSimulationResultsTable(simResult) {
     // Insert cells into the row
     let indexCell = newRow.insertCell(0);
     let experienceCell = newRow.insertCell(1);
-    let abilityCell1 = newRow.insertcell(2);
+    let abilityCell1 = newRow.insertCell(2);
 
 
     // Experience calculations
