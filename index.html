@@ -2392,6 +2392,7 @@
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
             listFiller();
+            setTimeout(() => {console.log('Wait 2 seconds');}, 2000);
             permuteStart();
             permuteStart();
             processNextAbilities();
