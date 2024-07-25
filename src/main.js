@@ -2136,13 +2136,6 @@ function updateTable(tableId, item, price) {
 // region automation
 
 
-
-
-
-
-
-
-
 function updateSimulationResultsTable(totalExperiencePerHour) {
     // Create a new row in the table
     let table = document.getElementById("simulationResultsTable");
