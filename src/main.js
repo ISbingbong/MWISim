@@ -2173,9 +2173,6 @@ darkModeToggle.addEventListener('change', () => {
 
 
 // region automation
-
-
-
 const abilitiesAutomation = [];
 const abilityLevels = [];
 // Initialize lists to hold the combinations 
@@ -2194,13 +2191,14 @@ let currentIndex1 = 0;
 let currentIndex2 = 0;
 let currentIndex3 = 0;
 let currentIndex4 = 0;
-let automationIndex = 0;
 // Ability levels current index for each list
 let currentIndexLevels1 = 0;
 let currentIndexLevels2 = 0;
 let currentIndexLevels3 = 0;
 let currentIndexLevels4 = 0;
 
+let totalPermutations = 0; // Total number of permutations
+let currentPermutationIndex = 0; // Current permutation index
 
 // TABLE
 function updateSimulationResultsTable(simResult) {
@@ -2225,18 +2223,14 @@ function updateSimulationResultsTable(simResult) {
     indexCell.textContent = table.rows.length - 1; // Row index
     experienceCell.textContent = totalExperiencePerHourAutomation; // Simulation result
     abilityCell1.textContent = abilitiesList1[currentIndex1]; // Ability 1 name
-    abilityCell2.textContent = abilitiesList2[currentIndex1]; // Ability 2 name
-    abilityCell3.textContent = abilitiesList3[currentIndex1]; // Ability 3 name
-    abilityCell4.textContent = abilitiesList4[currentIndex1]; // Ability 4 name
+    abilityCell2.textContent = abilitiesList2[currentIndex2]; // Ability 2 name
+    abilityCell3.textContent = abilitiesList3[currentIndex3]; // Ability 3 name
+    abilityCell4.textContent = abilitiesList4[currentIndex4]; // Ability 4 name
 
     // Optionally, you can format the experienceCell content or add additional columns as needed
 
     // Scroll to the bottom of the table
     table.parentNode.scrollTop = table.parentNode.scrollHeight;
-
-    // Index
-    
-
 }
 
 // Populate ability dropdown
@@ -2270,9 +2264,6 @@ function populateAbilityDropdown() {
         })
         .catch(error => console.error('Error:', error.message));
 }
-
-
-
 
 // ABILITIES
 function fillAbilities() {
@@ -2311,7 +2302,6 @@ function fillAbilities() {
         }
     }
     
-    
     // Increment indices for the next rotation
     currentIndex1 = (currentIndex1 + 1) % abilitiesList1.length;
     currentIndex2 = (currentIndex2 + 1) % abilitiesList2.length;
@@ -2320,50 +2310,48 @@ function fillAbilities() {
 }
 
 // ABILITY LEVELS
-
 function fillAbilitiesLevel() {
-
     // Set the input values for ability levels
     document.getElementById('inputAbilityLevel_1').value = abilitiesLevelList1[currentIndexLevels1];
     document.getElementById('inputAbilityLevel_2').value = abilitiesLevelList2[currentIndexLevels2];
     document.getElementById('inputAbilityLevel_3').value = abilitiesLevelList3[currentIndexLevels3];
     document.getElementById('inputAbilityLevel_4').value = abilitiesLevelList4[currentIndexLevels4];
     
-    
     // Increment indices for the next rotation
     currentIndexLevels1 = (currentIndexLevels1 + 1) % abilitiesLevelList1.length;
     currentIndexLevels2 = (currentIndexLevels2 + 1) % abilitiesLevelList2.length;
     currentIndexLevels3 = (currentIndexLevels3 + 1) % abilitiesLevelList3.length;
     currentIndexLevels4 = (currentIndexLevels4 + 1) % abilitiesLevelList4.length;
-    
-    
 }
-
-
 
 function startSimulationAutomation() {
     document.getElementById("buttonStartSimulation").click();
     // Simulate starting the simulation
     setTimeout(function() {
-
+        // Add any necessary simulation code here
     }, 1000); // Simulating 1 second delay for the simulation to complete
 }
 
 function processNextAbilities() {
-    fillAbilities();
-    fillAbilitiesLevel();
-    startSimulationAutomation();
-    
-    // Check progress bar completion
-    let checkProgressBar = setInterval(() => {
-        let progressBar = document.getElementById("simulationProgressBar");
-        let width = progressBar.style.width;
+    if (currentPermutationIndex < totalPermutations) {
+        fillAbilities();
+        fillAbilitiesLevel();
+        startSimulationAutomation();
         
-        if (width === "100%") {
-            clearInterval(checkProgressBar); // Stop checking
-            processNextAbilities(); // Call the function again
-        }
-    }, 100); // Check every 100ms (adjust as needed)
+        // Check progress bar completion
+        let checkProgressBar = setInterval(() => {
+            let progressBar = document.getElementById("simulationProgressBar");
+            let width = progressBar.style.width;
+            
+            if (width === "100%") {
+                clearInterval(checkProgressBar); // Stop checking
+                currentPermutationIndex++;
+                processNextAbilities(); // Call the function again
+            }
+        }, 100); // Check every 100ms (adjust as needed)
+    } else {
+        console.log('All permutations processed.');
+    }
 }
 
 function listFiller() {
@@ -2383,7 +2371,7 @@ function listFiller() {
                         const abilityName = data[abilityKey].name; // Get the name from the JSON data
                         abilitiesAutomation.push(abilityName);
                         abilityLevels.push(parseInt(level));
-                        if (abilities.length === (18 - 10 + 1)) { // Ensure all abilities are processed
+                        if (abilitiesAutomation.length === (18 - 10 + 1)) { // Ensure all abilities are processed
                             console.log('Abilities:', abilitiesAutomation); // Logs all abilities
                             console.log('Ability Levels:', abilityLevels); // Logs all levels
                         }
@@ -2395,8 +2383,6 @@ function listFiller() {
 }
 
 function permuteStart() {
-    
-
     // PERMUTATIONS
     // Function to generate all ability permutations of length 4
     function permute(arr, len) {
@@ -2427,7 +2413,8 @@ function permuteStart() {
         abilitiesList4.push(perm[3]);
     });
     
-    
+    // Set total permutations count
+    totalPermutations = allPermutations.length;
 
     // Function to generate all ability level permutations of length 4
     function permuteLevel(arr, len) {
@@ -2457,10 +2444,9 @@ function permuteStart() {
         abilitiesLevelList3.push(perm[2]);
         abilitiesLevelList4.push(perm[3]);
     });
-
 }
 
-
+// Start button click event
 document.getElementById("startAutomationButton").addEventListener("click", function() {
     // Clear existing table rows if any
     document.getElementById("simulationResultsTable").innerHTML = "";
@@ -2482,7 +2468,7 @@ document.getElementById("startAutomationButton").addEventListener("click", funct
     console.log('Ability Levels:', abilitiesLevelList2);
     console.log('Ability Levels:', abilitiesLevelList3);
     console.log('Ability Levels:', abilitiesLevelList4);
-})
+});
 
 // #endregion
 
