@@ -3625,7 +3625,7 @@ darkModeToggle.addEventListener('change', () => {
 // Region Automation
 
 
-function updateSimulationResultsTable(totalExperiencePerHour) {
+function updateSimulationResultsTable(simResult) {
     // Create a new row in the table
     let table = document.getElementById("simulationResultsTable");
     let newRow = table.insertRow();
@@ -3647,7 +3647,7 @@ function updateSimulationResultsTable(totalExperiencePerHour) {
 
     // Scroll to the bottom of the table
     table.parentNode.scrollTop = table.parentNode.scrollHeight;
-};
+}
 
 // Populate ability dropdown
 document.addEventListener('DOMContentLoaded', populateAbilityDropdown);
