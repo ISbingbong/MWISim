@@ -478,7 +478,7 @@ function updateDrinksUI() {
 // #region Abilities
 
 function initAbilitiesSection() {
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 5; i++) {
         let selectElement = document.getElementById("selectAbility_" + i);
         let inputElement = document.getElementById("inputAbilityLevel_" + i);
 
@@ -506,7 +506,7 @@ function abilitySelectHandler() {
 }
 
 function updateAbilityState() {
-    for (let i = 0; i < 18; i++) {
+    for (let i = 0; i < 5; i++) {
         let abilitySelect = document.getElementById("selectAbility_" + i);
         abilities[i] = abilitySelect.value;
         if (abilities[i] && !triggerMap[abilities[i]]) {
@@ -2137,7 +2137,7 @@ function updateTable(tableId, item, price) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetch("./combatsimulator/data/abilityDetailMap.json")
+    fetch(".data/abilityDetailMap.json")
         .then(response => response.json())
         .then(data => {
             const abilityDropdown = document.getElementById('selectAbility_10');
