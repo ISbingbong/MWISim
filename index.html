@@ -2305,7 +2305,7 @@
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
             
-            // Fill the arrays with the selected abilities and levels
+            // Fill the lists with the selected abilities and levels
 
 
             for (let i = 10; i <= 18; i++) { // Adjust the range based on your number of rows
@@ -2332,7 +2332,14 @@
                     }
                 }
             }
+            permuteStart();
 
+        });
+
+
+        function permuteStart() {
+            
+        
             // PERMUTATIONS
             // Function to generate all ability permutations of length 4
             function permute(arr, len) {
@@ -2405,7 +2412,7 @@
             console.log('Ability Levels:', abilitiesLevelList2);
             console.log('Ability Levels:', abilitiesLevelList3);
             console.log('Ability Levels:', abilitiesLevelList4);
-        });
+        }
     </script>
     
     
