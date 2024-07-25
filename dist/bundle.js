@@ -2494,10 +2494,6 @@ function showExperienceGained(simResult) {
     let resultDiv = document.getElementById("simulationResultExperienceGain");
     let newChildren = [];
 
-    let hoursSimulated = simResult.simulatedTime / ONE_HOUR;
-
-    let totalExperience = Object.values(simResult.experienceGained["player"]).reduce((prev, cur) => prev + cur, 0);
-    let totalExperiencePerHour = (totalExperience / hoursSimulated).toFixed(0);
     let totalRow = createRow(["col-md-6", "col-md-6 text-end"], ["Total", totalExperiencePerHour]);
     newChildren.push(totalRow);
 
