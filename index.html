@@ -2315,65 +2315,7 @@
         }
     
 
-        // PERMUTATIONS
 
-        // Function to generate all ability permutations of length 4
-        function permute(arr, len) {
-            let result = [];
-            function permuteRec(subArr, m = []) {
-                if (m.length === len) {
-                    result.push(m);
-                    return;
-                }
-                for (let i = 0; i < subArr.length; i++) {
-                    let current = subArr.slice();
-                    let next = current.splice(i, 1);
-                    permuteRec(current.slice(), m.concat(next));
-                }
-            }
-            permuteRec(arr);
-            return result;
-        }
-    
-
-    
-        // Populate the lists with combinations
-        allPermutations.forEach(perm => {
-            abilitiesList1.push(perm[0]);
-            abilitiesList2.push(perm[1]);
-            abilitiesList3.push(perm[2]);
-            abilitiesList4.push(perm[3]);
-        });
-        
-        
-
-        // Function to generate all ability level permutations of length 4
-        function permuteLevel(arr, len) {
-            let result = [];
-            function permuteRec(subArr, m = []) {
-                if (m.length === len) {
-                    result.push(m);
-                    return;
-                }
-                for (let i = 0; i < subArr.length; i++) {
-                    let current = subArr.slice();
-                    let next = current.splice(i, 1);
-                    permuteRec(current.slice(), m.concat(next));
-                }
-            }
-            permuteRec(arr);
-            return result;
-        }
-    
-
-    
-        // Populate the lists with combinations
-        allPermutationsLevel.forEach(perm => {
-            abilitiesLevelList1.push(perm[0]);
-            abilitiesLevelList2.push(perm[1]);
-            abilitiesLevelList3.push(perm[2]);
-            abilitiesLevelList4.push(perm[3]);
-        });
         
         function processNextAbilities() {
             fillAbilities();
@@ -2389,9 +2331,67 @@
         document.getElementById("startAutomationButton").addEventListener("click", function() {
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
+            // PERMUTATIONS
+
+            // Function to generate all ability permutations of length 4
+            function permute(arr, len) {
+                let result = [];
+                function permuteRec(subArr, m = []) {
+                    if (m.length === len) {
+                        result.push(m);
+                        return;
+                    }
+                    for (let i = 0; i < subArr.length; i++) {
+                        let current = subArr.slice();
+                        let next = current.splice(i, 1);
+                        permuteRec(current.slice(), m.concat(next));
+                    }
+                }
+                permuteRec(arr);
+                return result;
+            }
+        
+            // Generate all combinations of length 4
+            const allPermutations = permute(abilities, 4);
+        
+            // Populate the lists with combinations
+            allPermutations.forEach(perm => {
+                abilitiesList1.push(perm[0]);
+                abilitiesList2.push(perm[1]);
+                abilitiesList3.push(perm[2]);
+                abilitiesList4.push(perm[3]);
+            });
+            
+            
+
+            // Function to generate all ability level permutations of length 4
+            function permuteLevel(arr, len) {
+                let result = [];
+                function permuteRec(subArr, m = []) {
+                    if (m.length === len) {
+                        result.push(m);
+                        return;
+                    }
+                    for (let i = 0; i < subArr.length; i++) {
+                        let current = subArr.slice();
+                        let next = current.splice(i, 1);
+                        permuteRec(current.slice(), m.concat(next));
+                    }
+                }
+                permuteRec(arr);
+                return result;
+            }
+        
             // Generate all combinations of length 4
             const allPermutationsLevel = permuteLevel(abilitylevels, 4);
-            const allPermutations = permute(abilities, 4);
+        
+            // Populate the lists with combinations
+            allPermutationsLevel.forEach(perm => {
+                abilitiesLevelList1.push(perm[0]);
+                abilitiesLevelList2.push(perm[1]);
+                abilitiesLevelList3.push(perm[2]);
+                abilitiesLevelList4.push(perm[3]);
+            });
             // Start processing abilities
             processNextAbilities();
         });
