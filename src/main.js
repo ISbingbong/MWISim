@@ -812,7 +812,6 @@ function showSimulationResult(simResult) {
     showKills(simResult);
     showDeaths(simResult);
     showExperienceGained(simResult);
-    updateSimulationResultsTable(simResult); // AUTOMATION
     showConsumablesUsed(simResult);
     showHpSpent(simResult);
     showManaUsed(simResult);
@@ -2133,6 +2132,45 @@ function updateTable(tableId, item, price) {
     return newTotal - oldTotal;
 }
 
+// #endregion
+
+function updateState() {
+    updateEquipmentState();
+    updateLevels();
+    updateFoodState();
+    updateDrinksState();
+    updateAbilityState();
+}
+
+function updateUI() {
+    updateCombatStatsUI();
+    updateFoodUI();
+    updateDrinksUI();
+    updateAbilityUI();
+}
+
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+
+if (localStorage.getItem('darkModeEnabled') === 'true') {
+    body.classList.add('dark-mode');
+    const tables = document.getElementsByClassName('profit-table');
+    for (const table of tables) {
+        table.classList.toggle('table-striped');
+    }
+    darkModeToggle.checked = true;
+}
+
+darkModeToggle.addEventListener('change', () => {
+    body.classList.toggle('dark-mode');
+    const tables = document.getElementsByClassName('profit-table');
+    for (const table of tables) {
+        table.classList.toggle('table-striped');
+    }
+    localStorage.setItem('darkModeEnabled', darkModeToggle.checked);
+});
+
+
 // region automation
 
 
@@ -2422,41 +2460,8 @@ document.getElementById("startAutomationButton").addEventListener("click", funct
 
 // #endregion
 
-function updateState() {
-    updateEquipmentState();
-    updateLevels();
-    updateFoodState();
-    updateDrinksState();
-    updateAbilityState();
-}
 
-function updateUI() {
-    updateCombatStatsUI();
-    updateFoodUI();
-    updateDrinksUI();
-    updateAbilityUI();
-}
 
-const darkModeToggle = document.getElementById('darkModeToggle');
-const body = document.body;
-
-if (localStorage.getItem('darkModeEnabled') === 'true') {
-    body.classList.add('dark-mode');
-    const tables = document.getElementsByClassName('profit-table');
-    for (const table of tables) {
-        table.classList.toggle('table-striped');
-    }
-    darkModeToggle.checked = true;
-}
-
-darkModeToggle.addEventListener('change', () => {
-    body.classList.toggle('dark-mode');
-    const tables = document.getElementsByClassName('profit-table');
-    for (const table of tables) {
-        table.classList.toggle('table-striped');
-    }
-    localStorage.setItem('darkModeEnabled', darkModeToggle.checked);
-});
 
 
 initEquipmentSection();
@@ -2471,7 +2476,6 @@ initSimulationControls();
 initEquipmentSetsModal();
 initErrorHandling();
 initImportExportModal();
-
 
 updateState();
 updateUI();
