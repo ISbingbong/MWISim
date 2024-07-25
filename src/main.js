@@ -2137,7 +2137,7 @@ function updateTable(tableId, item, price) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('data\abilityDetailMap.json')
+    fetch(abilityDetailMap)
         .then(response => response.json())
         .then(data => {
             const abilityDropdown = document.getElementById('selectAbility_10');
