@@ -2136,15 +2136,14 @@ function updateTable(tableId, item, price) {
 // region automation
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    fetch(".data/abilityDetailMap.json")
+function populateAbilityDropdown() {
+    fetch("./data/abilityDetailMap.json")
         .then(response => {
             if (!response.ok) {
                 throw new Error('Error loading JSON');
             }
             return response.json();
         })
-        .then(response => response.json())
         .then(data => {
             const abilityDropdown = document.getElementById('selectAbility_10');
             if (!abilityDropdown) {
@@ -2160,9 +2159,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         })
-        .catch(error => console.error(error.message));
-        .catch(error => console.error('Error loading JSON:', error));
-});
+        .catch(error => console.error('Error:', error.message));
+}
 
 
 
@@ -2228,7 +2226,7 @@ darkModeToggle.addEventListener('change', () => {
     localStorage.setItem('darkModeEnabled', darkModeToggle.checked);
 });
 
-
+populateAbilityDropdown(); // AUTOMATION
 initAbilitiesSectionAutomate(); // AUTOMATION
 updateAbilityStateAutomate(); // AUTOMATION
 initEquipmentSection();
