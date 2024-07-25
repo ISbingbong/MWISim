@@ -2335,8 +2335,7 @@
             return result;
         }
     
-        // Generate all combinations of length 4
-        const allPermutations = permute(abilities, 4);
+
     
         // Populate the lists with combinations
         allPermutations.forEach(perm => {
@@ -2392,6 +2391,7 @@
             document.getElementById("simulationResultsTable").innerHTML = "";
             // Generate all combinations of length 4
             const allPermutationsLevel = permuteLevel(abilitylevels, 4);
+            const allPermutations = permute(abilities, 4);
             // Start processing abilities
             processNextAbilities();
         });
