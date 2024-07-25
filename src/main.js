@@ -2324,7 +2324,7 @@ function fillAbilitiesLevel() {
 
 
 
-function startSimulation() {
+function startSimulationAutomation() {
     document.getElementById("buttonStartSimulation").click();
     // Simulate starting the simulation
     setTimeout(function() {
@@ -2336,7 +2336,7 @@ function startSimulation() {
 function processNextAbilities() {
     fillAbilities();
     fillAbilitiesLevel();
-    startSimulation();
+    startSimulationAutomation();
     setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
 }
 
