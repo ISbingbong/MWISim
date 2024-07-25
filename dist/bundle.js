@@ -2264,7 +2264,7 @@ function showSimulationResult(simResult) {
     showDeaths(simResult);
     showExperienceGained(simResult);
     showConsumablesUsed(simResult);
-    updateSimulationResultsTable(simResult;) // AUTOMATION
+    updateSimulationResultsTable(simResult); // AUTOMATION
     showHpSpent(simResult);
     showManaUsed(simResult);
     showHitpointsGained(simResult);
