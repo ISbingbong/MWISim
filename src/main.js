@@ -478,7 +478,7 @@ function updateDrinksUI() {
 // #region Abilities
 
 function initAbilitiesSection() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 18; i++) {
         let selectElement = document.getElementById("selectAbility_" + i);
         let inputElement = document.getElementById("inputAbilityLevel_" + i);
 
