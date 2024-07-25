@@ -2286,15 +2286,11 @@
         }
     
 
-
-        
         function processNextAbilities() {
             fillAbilities();
             fillAbilitiesLevel();
             startSimulation();
             setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
-
-
         }
 
         function listFiller() {
@@ -2395,7 +2391,7 @@
         document.getElementById("startAutomationButton").addEventListener("click", function() {
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
-            listFiller()
+            listFiller();
                 .then(() => {
                     permuteStart();
                     processNextAbilities();
