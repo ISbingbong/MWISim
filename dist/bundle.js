@@ -3637,7 +3637,7 @@ function updateSimulationResultsTable(simResult) {
     let hoursSimulatedAutomation = simResult.simulatedTime / ONE_HOUR;
 
     let totalExperienceAutomation = Object.values(simResult.experienceGained["player"]).reduce((prev, cur) => prev + cur, 0);
-    let totalExperiencePerHourAutomation = (totalExperience / hoursSimulated).toFixed(0);
+    let totalExperiencePerHourAutomation = (totalExperienceAutomation / hoursSimulatedAutomation).toFixed(0);
     // Populate cells with data
     indexCell.textContent = table.rows.length - 1; // Row index
     experienceCell.textContent = totalExperiencePerHourAutomation; // Simulation result
