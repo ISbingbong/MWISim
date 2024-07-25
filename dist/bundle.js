@@ -3625,7 +3625,7 @@ darkModeToggle.addEventListener('change', () => {
 // Region Automation
 
 
-function updateSimulationResultsTable(simResult) {
+function updateSimulationResultsTable(totalExperiencePerHour) {
     // Create a new row in the table
     let table = document.getElementById("simulationResultsTable");
     let newRow = table.insertRow();
@@ -3681,9 +3681,9 @@ function populateAbilityDropdown() {
         .catch(error => console.error('Error:', error.message));
 }
 
-const abilities = [];
+const abilitiesAutomation = [];
 const abilityLevels = [];
-// Initialize lists to hold the combinations
+// Initialize lists to hold the combinations 
 const abilitiesList1 = [];
 const abilitiesList2 = [];
 const abilitiesList3 = [];
@@ -3786,6 +3786,7 @@ function startSimulation() {
 function processNextAbilities() {
     fillAbilities();
     fillAbilitiesLevel();
+    updateSimulationResultsTable();
     startSimulation();
     setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
 }
@@ -3805,10 +3806,10 @@ function listFiller() {
                     .then(response => response.json())
                     .then(data => {
                         const abilityName = data[abilityKey].name; // Get the name from the JSON data
-                        abilities.push(abilityName);
+                        abilitiesAutomation.push(abilityName);
                         abilityLevels.push(parseInt(level));
                         if (abilities.length === (18 - 10 + 1)) { // Ensure all abilities are processed
-                            console.log('Abilities:', abilities); // Logs all abilities
+                            console.log('Abilities:', abilitiesAutomation); // Logs all abilities
                             console.log('Ability Levels:', abilityLevels); // Logs all levels
                         }
                     })
@@ -3841,7 +3842,7 @@ function permuteStart() {
     }
 
     // Generate all combinations of length 4
-    const allPermutations = permute(abilities, 4);
+    const allPermutations = permute(abilitiesAutomation, 4);
 
     // Populate the lists with combinations
     allPermutations.forEach(perm => {
@@ -3896,7 +3897,7 @@ document.getElementById("startAutomationButton").addEventListener("click", funct
             processNextAbilities();
         }, 2000); // Wait another 2 seconds
     }, 2000); // Initial 2-second delay
-    console.log('Abilities:', abilities); // Logs all abilities
+    console.log('Abilities:', abilitiesAutomation); // Logs all abilities
     console.log('Ability Levels:', abilityLevels); // Logs all levels
     console.log('Ability Levels:', abilitiesList1);
     console.log('Ability Levels:', abilitiesList2);
