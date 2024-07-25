@@ -2184,7 +2184,36 @@
                 .catch(error => console.error('Error:', error.message));
         }
 
+// Add event listener to the "Start Automation" button
+document.getElementById('startAutomationButton').addEventListener('click', function() {
+    const abilities = [];
+    const abilityLevels = [];
 
+    for (let i = 10; i <= 17; i++) { // Adjust the range based on your number of rows
+        const abilitySelect = document.getElementById(`selectAbility_${i}`);
+        const abilityLevel = document.getElementById(`inputAbilityLevel_${i}`);
+
+        if (abilitySelect && abilityLevel) {
+            const abilityKey = abilitySelect.value; // Get the key of the selected ability
+            const level = abilityLevel.value;
+            if (abilityKey) { // Ensure only non-empty abilities are added
+                // Extract the ability name from the JSON data using the abilityKey
+                fetch("./src/combatsimulator/data/abilityDetailMap.json")
+                    .then(response => response.json())
+                    .then(data => {
+                        const abilityName = data[abilityKey].name; // Get the name from the JSON data
+                        abilities.push(abilityName);
+                        abilityLevels.push(parseInt(level));
+                        if (abilities.length === (17 - 10 + 1)) { // Ensure all abilities are processed
+                            console.log('Abilities:', abilities); // Logs all abilities
+                            console.log('Ability Levels:', abilityLevels); // Logs all levels
+                        }
+                    })
+                    .catch(error => console.error('Error:', error.message));
+            }
+        }
+    }
+});
 
         // Define lists of abilities for each slot
         const abilities = [];
@@ -2366,35 +2395,6 @@
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
             // Start processing abilities
-            const abilities = [];
-            const abilityLevels = [];
-
-            for (let i = 10; i <= 17; i++) { // Adjust the range based on your number of rows
-                const abilitySelect = document.getElementById(`selectAbility_${i}`);
-                const abilityLevel = document.getElementById(`inputAbilityLevel_${i}`);
-
-                if (abilitySelect && abilityLevel) {
-                    const abilityKey = abilitySelect.value; // Get the key of the selected ability
-                    const level = abilityLevel.value;
-                    if (abilityKey) { // Ensure only non-empty abilities are added
-                        // Extract the ability name from the JSON data using the abilityKey
-                        fetch("./src/combatsimulator/data/abilityDetailMap.json")
-                            .then(response => response.json())
-                            .then(data => {
-                                const abilityName = data[abilityKey].name; // Get the name from the JSON data
-                                abilities.push(abilityName);
-                                abilityLevels.push(parseInt(level));
-                                if (abilities.length === (17 - 10 + 1)) { // Ensure all abilities are processed
-                                    console.log('Abilities:', abilities); // Logs all abilities
-                                    console.log('Ability Levels:', abilityLevels); // Logs all levels
-                                }
-                            })
-                            .catch(error => console.error('Error:', error.message));
-                    }
-                }
-            }
-        
-            setTimeout(function() {}, 1000);
             processNextAbilities();
         });
     </script>
