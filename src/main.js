@@ -2187,8 +2187,7 @@ function updateSimulationResultsTable(totalExperiencePerHour) {
     table.parentNode.scrollTop = table.parentNode.scrollHeight;
 }
 
-initAbilitiesSectionAutomate(); // AUTOMATION
-updateAbilityStateAutomate(); // AUTOMATION
+
 
 // #endregion
 
@@ -2228,6 +2227,9 @@ darkModeToggle.addEventListener('change', () => {
     localStorage.setItem('darkModeEnabled', darkModeToggle.checked);
 });
 
+
+initAbilitiesSectionAutomate(); // AUTOMATION
+updateAbilityStateAutomate(); // AUTOMATION
 initEquipmentSection();
 initHouseRoomsModal();
 initLevelSection();
