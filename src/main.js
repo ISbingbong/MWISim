@@ -2153,7 +2153,7 @@ function initAbilitiesSectionAutomate() {
     }
 }
 
-function updateAbilityState() {
+function updateAbilityStateAutomate() {
     for (let i = 10; i < 17; i++) {
         let abilitySelect = document.getElementById("selectAbility_" + i);
         abilities[i] = abilitySelect.value;
@@ -2164,17 +2164,7 @@ function updateAbilityState() {
     }
 }
 
-function updateAbilityUI() {
-    for (let i = 10; i < 17; i++) {
-        let selectElement = document.getElementById("selectAbility_" + i);
-        let inputElement = document.getElementById("inputAbilityLevel_" + i);
-        let triggerButton = document.getElementById("buttonAbilityTrigger_" + i);
 
-        selectElement.disabled = player.intelligenceLevel < abilitySlotsLevelRequirementList[i + 1];
-        inputElement.disabled = player.intelligenceLevel < abilitySlotsLevelRequirementList[i + 1];
-        triggerButton.disabled = player.intelligenceLevel < abilitySlotsLevelRequirementList[i + 1] || !abilities[i];
-    }
-}
 
 
 
@@ -2198,7 +2188,7 @@ function updateSimulationResultsTable(totalExperiencePerHour) {
 }
 
 initAbilitiesSectionAutomate(); // AUTOMATION
-
+updateAbilityStateAutomate(); // AUTOMATION
 
 // #endregion
 
