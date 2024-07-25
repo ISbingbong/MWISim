@@ -2136,7 +2136,8 @@ function updateTable(tableId, item, price) {
 // region automation
 
 
-function updateSimulationResultsTable(totalExperiencePerHour) {
+
+function updateSimulationResultsTable(simResult) {
     // Create a new row in the table
     let table = document.getElementById("simulationResultsTable");
     let newRow = table.insertRow();
@@ -2145,14 +2146,13 @@ function updateSimulationResultsTable(totalExperiencePerHour) {
     let indexCell = newRow.insertCell(0);
     let experienceCell = newRow.insertCell(1);
 
-    let hoursSimulated = simResult.simulatedTime / ONE_HOUR;
+    let hoursSimulatedAutomation = simResult.simulatedTime / ONE_HOUR;
 
-    let totalExperience = Object.values(simResult.experienceGained["player"]).reduce((prev, cur) => prev + cur, 0);
-    let totalExperiencePerHour = (totalExperience / hoursSimulated).toFixed(0);
-    
+    let totalExperienceAutomation = Object.values(simResult.experienceGained["player"]).reduce((prev, cur) => prev + cur, 0);
+    let totalExperiencePerHourAutomation = (totalExperienceAutomation / hoursSimulatedAutomation).toFixed(0);
     // Populate cells with data
     indexCell.textContent = table.rows.length - 1; // Row index
-    experienceCell.textContent = totalExperiencePerHour; // Simulation result
+    experienceCell.textContent = totalExperiencePerHourAutomation; // Simulation result
 
     // Optionally, you can format the experienceCell content or add additional columns as needed
 
