@@ -3627,6 +3627,34 @@
 // Region Automation
 
 
+
+const abilitiesAutomation = [];
+const abilityLevels = [];
+// Initialize lists to hold the combinations 
+const abilitiesList1 = [];
+const abilitiesList2 = [];
+const abilitiesList3 = [];
+const abilitiesList4 = [];
+
+const abilitiesLevelList1 = [];
+const abilitiesLevelList2 = [];
+const abilitiesLevelList3 = [];
+const abilitiesLevelList4 = [];
+
+// Ability levels current index for each list
+let currentIndex1 = 0;
+let currentIndex2 = 0;
+let currentIndex3 = 0;
+let currentIndex4 = 0;
+let automationIndex = 0;
+// Ability levels current index for each list
+let currentIndexLevels1 = 0;
+let currentIndexLevels2 = 0;
+let currentIndexLevels3 = 0;
+let currentIndexLevels4 = 0;
+
+
+// TABLE
 function updateSimulationResultsTable(simResult) {
     // Create a new row in the table
     let table = document.getElementById("simulationResultsTable");
@@ -3635,7 +3663,7 @@ function updateSimulationResultsTable(simResult) {
     // Insert cells into the row
     let indexCell = newRow.insertCell(0);
     let experienceCell = newRow.insertCell(1);
-    let AbilityCell1 = newRow.insertcell(2)
+    let abilityCell1 = newRow.insertcell(2)
 
 
     // Experience calculations
@@ -3646,12 +3674,16 @@ function updateSimulationResultsTable(simResult) {
     // Populate cells with data
     indexCell.textContent = table.rows.length - 1; // Row index
     experienceCell.textContent = totalExperiencePerHourAutomation; // Simulation result
-    AbilityCell1.textContent = abilitiesList1[currentIndex1] // Ability 1 name
+    abilityCell1.textContent = abilitiesList1[currentIndex1] // Ability 1 name
 
     // Optionally, you can format the experienceCell content or add additional columns as needed
 
     // Scroll to the bottom of the table
     table.parentNode.scrollTop = table.parentNode.scrollHeight;
+
+    // Index
+    
+    automationIndex = (automationIndex + 1) % abilitiesList1.length;
 }
 
 // Populate ability dropdown
@@ -3686,30 +3718,7 @@ function populateAbilityDropdown() {
         .catch(error => console.error('Error:', error.message));
 }
 
-const abilitiesAutomation = [];
-const abilityLevels = [];
-// Initialize lists to hold the combinations 
-const abilitiesList1 = [];
-const abilitiesList2 = [];
-const abilitiesList3 = [];
-const abilitiesList4 = [];
 
-const abilitiesLevelList1 = [];
-const abilitiesLevelList2 = [];
-const abilitiesLevelList3 = [];
-const abilitiesLevelList4 = [];
-
-// Ability levels current index for each list
-let currentIndex1 = 0;
-let currentIndex2 = 0;
-let currentIndex3 = 0;
-let currentIndex4 = 0;
-
-// Ability levels current index for each list
-let currentIndexLevels1 = 0;
-let currentIndexLevels2 = 0;
-let currentIndexLevels3 = 0;
-let currentIndexLevels4 = 0;
 
 
 // ABILITIES
