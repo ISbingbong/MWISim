@@ -2212,7 +2212,9 @@ function updateSimulationResultsTable(simResult) {
     let indexCell = newRow.insertCell(0);
     let experienceCell = newRow.insertCell(1);
     let abilityCell1 = newRow.insertCell(2);
-
+    let abilityCell2 = newRow.insertCell(3);
+    let abilityCell3 = newRow.insertCell(4);
+    let abilityCell4 = newRow.insertCell(5);
 
     // Experience calculations
     let hoursSimulatedAutomation = simResult.simulatedTime / ONE_HOUR;
@@ -2223,6 +2225,9 @@ function updateSimulationResultsTable(simResult) {
     indexCell.textContent = table.rows.length - 1; // Row index
     experienceCell.textContent = totalExperiencePerHourAutomation; // Simulation result
     abilityCell1.textContent = abilitiesList1[currentIndex1]; // Ability 1 name
+    abilityCell2.textContent = abilitiesList2[currentIndex2]; // Ability 2 name
+    abilityCell3.textContent = abilitiesList3[currentIndex3]; // Ability 3 name
+    abilityCell4.textContent = abilitiesList4[currentIndex4]; // Ability 4 name
 
     // Optionally, you can format the experienceCell content or add additional columns as needed
 
