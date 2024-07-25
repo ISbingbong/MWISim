@@ -2184,9 +2184,7 @@
                 .catch(error => console.error('Error:', error.message));
         }
 
-        const abilities = [];
-        const abilityLevels = [];
-        
+
         // Initialize lists to hold the combinations
         const abilitiesList1 = [];
         const abilitiesList2 = [];
@@ -2305,7 +2303,8 @@
             document.getElementById("simulationResultsTable").innerHTML = "";
             
             // Fill the arrays with the selected abilities and levels
-
+            const abilities = [];
+            const abilityLevels = [];
 
             for (let i = 10; i <= 17; i++) { // Adjust the range based on your number of rows
                 const abilitySelect = document.getElementById(`selectAbility_${i}`);
@@ -2383,7 +2382,7 @@
             }
         
             // Generate all combinations of length 4
-            const allPermutationsLevel = permuteLevel(abilitylevels, 4);
+            const allPermutationsLevel = permuteLevel(abilityLevels, 4);
         
             // Populate the lists with combinations
             allPermutationsLevel.forEach(perm => {
