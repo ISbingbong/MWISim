@@ -3788,11 +3788,23 @@ function startSimulationAutomation() {
 }
 
 
+function checkProgressAndContinue() {
+    const progressBar = document.getElementById('simulationProgressBar');
+    const width = parseFloat(progressBar.style.width);
+    
+    if (width >= 100) {
+        processNextAbilities();
+    } else {
+        // Check again after a short delay
+        setTimeout(checkProgressAndContinue, 100); // Check every 100ms
+    }
+}
+
 function processNextAbilities() {
     fillAbilities();
     fillAbilitiesLevel();
     startSimulationAutomation();
-    setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
+    checkProgressAndContinue(); // Call again to check if the progress bar is at 100%
 }
 
 function listFiller() {
