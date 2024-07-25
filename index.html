@@ -2385,11 +2385,10 @@
             // Clear existing table rows if any
             document.getElementById("simulationResultsTable").innerHTML = "";
             listFiller();
-            setTimeout(() => {console.log('Wait 2 seconds');}, 4000);
-            permuteStart();
-            setTimeout(() => {console.log('Wait 2 seconds');}, 2000);
-            permuteStart();
-            processNextAbilities();
+            setTimeout(() => {
+                permuteStart();
+                processNextAbilities();
+            }, 4000);
             console.log('Abilities:', abilities); // Logs all abilities
             console.log('Ability Levels:', abilityLevels); // Logs all levels
             console.log('Ability Levels:', abilitiesList1);
