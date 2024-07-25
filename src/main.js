@@ -506,7 +506,7 @@ function abilitySelectHandler() {
 }
 
 function updateAbilityState() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 18; i++) {
         let abilitySelect = document.getElementById("selectAbility_" + i);
         abilities[i] = abilitySelect.value;
         if (abilities[i] && !triggerMap[abilities[i]]) {
