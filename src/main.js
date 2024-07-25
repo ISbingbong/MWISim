@@ -2136,33 +2136,24 @@ function updateTable(tableId, item, price) {
 // region automation
 
 
-function initAbilitiesSectionAutomate() {
-    for (let i = 10; i < 17; i++) {
-        let selectElement = document.getElementById("selectAbility_" + i);
-        let inputElement = document.getElementById("inputAbilityLevel_" + i);
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('data\abilityDetailMap.json')
+        .then(response => response.json())
+        .then(data => {
+            const abilityDropdown = document.getElementById('selectAbility_10');
+            for (const key in data) {
+                if (data.hasOwnProperty(key)) {
+                    const ability = data[key];
+                    const option = document.createElement('option');
+                    option.value = key;
+                    option.textContent = ability.name;
+                    abilityDropdown.appendChild(option);
+                }
+            }
+        })
+        .catch(error => console.error('Error loading JSON:', error));
+});
 
-        inputElement.value = 1;
-
-        let gameAbilities = Object.values(abilityDetailMap).filter(x => !x.isSpecialAbility).sort((a, b) => a.sortIndex - b.sortIndex);
-        
-        for (const ability of Object.values(gameAbilities)) {
-            selectElement.add(new Option(ability.name, ability.hrid));
-        }
-
-        selectElement.addEventListener("change", abilitySelectHandler);
-    }
-}
-
-function updateAbilityStateAutomate() {
-    for (let i = 10; i < 17; i++) {
-        let abilitySelect = document.getElementById("selectAbility_" + i);
-        abilities[i] = abilitySelect.value;
-        if (abilities[i] && !triggerMap[abilities[i]]) {
-            let gameAbility = abilityDetailMap[abilities[i]];
-            triggerMap[abilities[i]] = structuredClone(gameAbility.defaultCombatTriggers);
-        }
-    }
-}
 
 
 
