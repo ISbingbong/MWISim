@@ -2290,6 +2290,7 @@
             fillAbilities();
             fillAbilitiesLevel();
             startSimulation();
+            updateSimulationResultsTable();
             setTimeout(processNextAbilities, 3000); // Adjust the delay as needed
         }
 
@@ -2394,7 +2395,7 @@
             listFiller();
             setTimeout(() => {
                 permuteStart();
-                
+
                 setTimeout(() => {
                     processNextAbilities();
                 }, 2000); // Wait another 2 seconds
@@ -2410,6 +2411,39 @@
             console.log('Ability Levels:', abilitiesLevelList3);
             console.log('Ability Levels:', abilitiesLevelList4);
         })
+
+
+
+
+
+
+
+
+        function updateSimulationResultsTable(totalExperiencePerHour) {
+            // Create a new row in the table
+            let table = document.getElementById("simulationResultsTable");
+            let newRow = table.insertRow();
+
+            // Insert cells into the row
+            let indexCell = newRow.insertCell(0);
+            let experienceCell = newRow.insertCell(1);
+
+            let hoursSimulated = simResult.simulatedTime / ONE_HOUR;
+
+            let totalExperience = Object.values(simResult.experienceGained["player"]).reduce((prev, cur) => prev + cur, 0);
+            let totalExperiencePerHour = (totalExperience / hoursSimulated).toFixed(0);
+            
+            // Populate cells with data
+            indexCell.textContent = table.rows.length - 1; // Row index
+            experienceCell.textContent = totalExperiencePerHour; // Simulation result
+
+            // Optionally, you can format the experienceCell content or add additional columns as needed
+
+            // Scroll to the bottom of the table
+            table.parentNode.scrollTop = table.parentNode.scrollHeight;
+}
+
+
 
     </script>
     
