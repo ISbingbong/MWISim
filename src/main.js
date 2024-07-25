@@ -2194,7 +2194,7 @@ function populateAbilityDropdown() {
 
 const abilitiesAutomation = [];
 const abilityLevels = [];
-// Initialize lists to hold the combinations
+// Initialize lists to hold the combinations 
 const abilitiesList1 = [];
 const abilitiesList2 = [];
 const abilitiesList3 = [];
