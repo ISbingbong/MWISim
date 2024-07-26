@@ -2017,7 +2017,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <select id="selectAbility_10" class="form-select">
-                                <option value="">Empty</option>
+                                <option value="">Aura</option>
                             </select>
                         </div>
                         <div class="col">
@@ -2121,6 +2121,7 @@
 
 
                 <button id="startAutomationButton" class="btn btn-secondary">Start Automation</button>
+                <button id="stopAutomationButton" class="btn btn-secondary">Stop Automation</button>
             </div>
         </div>
         <hr>
@@ -2128,15 +2129,10 @@
             <!-- Simulation results table -->
             <div class="col">
                 <h3>Simulation Results </h3>
-                <table class="table">
+                <table class="table" id="simulationResultsTableId">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Experience Gain</th>
-                            <th scope="col">Ability 1</th>
-                            <th scope="col">Ability 2</th>
-                            <th scope="col">Ability 3</th>
-                            <th scope="col">Ability 4</th>
+                            <!-- Headers will be added here dynamically -->
                         </tr>
                     </thead>
                     <tbody id="simulationResultsTable">
@@ -2147,7 +2143,23 @@
         </div>
     </div>
 
+    <script>
+        // Your JavaScript code here
+        let tableAutomation = document.querySelector("#simulationResultsTableId");
 
+        if (tableAutomation) {
+            let thead = tableAutomation.querySelector("thead");
+            let tbody = document.getElementById("simulationResultsTable");
+
+            if (thead && tbody) {
+                // Your existing logic here
+            } else {
+                console.error("Table header or body not found");
+            }
+        } else {
+            console.error("Table with ID 'simulationResultsTableId' not found");
+        }
+    </script>
 
 
 

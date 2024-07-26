@@ -3625,7 +3625,7 @@
 
 
 // Region Automation
-
+let stopProcessing = false;
 const abilitiesAutomation = [];
 const abilityLevels = [];
 // Initialize lists to hold the combinations 
@@ -3655,36 +3655,92 @@ let currentPermutationIndex = 0; // Current permutation index
 
 // TABLE
 function updateSimulationResultsTable(simResult) {
-    // Create a new row in the table
-    let table = document.getElementById("simulationResultsTable");
-    let newRow = table.insertRow();
+    let tableAutomation = document.querySelector("#simulationResultsTableId");
+    let thead = tableAutomation.querySelector("thead");
+    let tbody = document.getElementById("simulationResultsTable");
 
-    // Insert cells into the row
-    let indexCell = newRow.insertCell(0);
-    let experienceCell = newRow.insertCell(1);
-    let abilityCell1 = newRow.insertCell(2);
-    let abilityCell2 = newRow.insertCell(3);
-    let abilityCell3 = newRow.insertCell(4);
-    let abilityCell4 = newRow.insertCell(5);
+    // Check if thead has no header row
+    if (!thead.querySelector('tr').children.length) {
+        // Define headers
+        let headers = ["Index", "Ability 1", "Ability 2", "Ability 3", "Ability 4", 
+                       "Total exp", "Stamina", "Intelligence", 
+                       "Attack", "Power", "Defense", "Ranged", "Magic"];
+
+        // Create and insert the header row
+        let headerRow = thead.querySelector('tr');
+        headers.forEach((headerText, index) => {
+            let headerCell = document.createElement("th");
+            headerCell.textContent = headerText;
+            headerCell.addEventListener('click', () => sortTable(index));
+            headerRow.appendChild(headerCell);
+        });
+    }
+
+    // Create a new row in the table
+    let newRow = document.createElement('tr');
 
     // Experience calculations
     let hoursSimulatedAutomation = simResult.simulatedTime / ONE_HOUR;
     let totalExperienceAutomation = Object.values(simResult.experienceGained["player"]).reduce((prev, cur) => prev + cur, 0);
     let totalExperiencePerHourAutomation = (totalExperienceAutomation / hoursSimulatedAutomation).toFixed(0);
-    
-    // Populate cells with data
-    indexCell.textContent = table.rows.length - 1; // Row index
-    experienceCell.textContent = totalExperiencePerHourAutomation; // Simulation result
-    abilityCell1.textContent = abilitiesList1[currentIndex1]; // Ability 1 name
-    abilityCell2.textContent = abilitiesList2[currentIndex2]; // Ability 2 name
-    abilityCell3.textContent = abilitiesList3[currentIndex3]; // Ability 3 name
-    abilityCell4.textContent = abilitiesList4[currentIndex4]; // Ability 4 name
 
-    // Optionally, you can format the experienceCell content or add additional columns as needed
+    // Populate the cells with data
+    let cells = [
+        tableAutomation.querySelectorAll('tbody tr').length + 1, // Index
+        document.getElementById('selectAbility_1').selectedOptions[0].textContent,
+        document.getElementById('selectAbility_2').selectedOptions[0].textContent,
+        document.getElementById('selectAbility_3').selectedOptions[0].textContent,
+        document.getElementById('selectAbility_4').selectedOptions[0].textContent,
+        totalExperiencePerHourAutomation
+    ];
+
+    ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach(skillAutomation => {
+        let experienceAutomation = simResult.experienceGained["player"][skillAutomation] ?? 0;
+        let experiencePerHourAutomation = (experienceAutomation / hoursSimulatedAutomation).toFixed(0);
+        cells.push(experiencePerHourAutomation);
+    });
+
+    cells.forEach(cellText => {
+        let cell = document.createElement('td');
+        cell.textContent = cellText;
+        newRow.appendChild(cell);
+    });
+
+    tbody.appendChild(newRow);
 
     // Scroll to the bottom of the table
-    table.parentNode.scrollTop = table.parentNode.scrollHeight;
+    tableAutomation.parentNode.scrollTop = tableAutomation.parentNode.scrollHeight;
 }
+
+function sortTable(columnIndex) {
+    let tableAutomation = document.querySelector("#simulationResultsTableId");
+    let tbody = document.getElementById("simulationResultsTable");
+    let rows = Array.from(tbody.rows);
+    let isAscending = tableAutomation.getAttribute('data-sort-order') === 'asc';
+    tableAutomation.setAttribute('data-sort-order', isAscending ? 'desc' : 'asc');
+
+    rows.sort((rowA, rowB) => {
+        let cellA = rowA.cells[columnIndex].textContent.trim();
+        let cellB = rowB.cells[columnIndex].textContent.trim();
+
+        if (!isNaN(cellA) && !isNaN(cellB)) {
+            return (parseFloat(cellA) - parseFloat(cellB)) * (isAscending ? 1 : -1);
+        } else {
+            return (cellA.localeCompare(cellB)) * (isAscending ? 1 : -1);
+        }
+    });
+
+    rows.forEach(row => tbody.appendChild(row));
+}
+
+
+
+
+
+
+
+
+
 
 // Populate ability dropdown
 document.addEventListener('DOMContentLoaded', populateAbilityDropdown);
@@ -3704,19 +3760,29 @@ function populateAbilityDropdown() {
                     console.error(`Element with id "selectAbility_${i}" not found`);
                     continue;
                 }
-                for (const key in data) {
-                    if (data.hasOwnProperty(key)) {
-                        const ability = data[key];
-                        const option = document.createElement('option');
-                        option.value = key;
-                        option.textContent = ability.name;
-                        abilityDropdown.appendChild(option);
-                    }
+
+                let gameAbilities;
+                if (i == 10) { // assuming i == 0 in the original code corresponds to i == 10 here
+                    gameAbilities = Object.values(data)
+                        .filter(x => x.isSpecialAbility && x.name !== "Promote")
+                        .sort((a, b) => a.sortIndex - b.sortIndex);
+                } else {
+                    gameAbilities = Object.values(data)
+                        .filter(x => !x.isSpecialAbility)
+                        .sort((a, b) => a.sortIndex - b.sortIndex);
+                }
+
+                for (const ability of gameAbilities) {
+                    const option = document.createElement('option');
+                    option.value = ability.name; // Use key if needed: key
+                    option.textContent = ability.name;
+                    abilityDropdown.appendChild(option);
                 }
             }
         })
         .catch(error => console.error('Error:', error.message));
 }
+
 
 // ABILITIES
 function fillAbilities() {
@@ -3786,6 +3852,10 @@ function startSimulationAutomation() {
 }
 
 function processNextAbilities() {
+    if (stopProcessing) {
+        console.log('Processing stopped.');
+        return;
+    }
     if (currentPermutationIndex < totalPermutations) {
         fillAbilities();
         fillAbilitiesLevel();
@@ -3808,32 +3878,29 @@ function processNextAbilities() {
 }
 
 function listFiller() {
+
+    resetListsAndIndices();
     // Fill the lists with the selected abilities and levels
-    for (let i = 10; i <= 18; i++) { // Adjust the range based on your number of rows
+    for (let i = 11; i <= 17; i++) { // Adjust the range based on your number of rows
         const abilitySelect = document.getElementById(`selectAbility_${i}`);
         const abilityLevel = document.getElementById(`inputAbilityLevel_${i}`);
 
         if (abilitySelect && abilityLevel) {
-            const abilityKey = abilitySelect.value; // Get the key of the selected ability
+            const abilityName = abilitySelect.value; // Get the name of the selected ability
             const level = abilityLevel.value;
-            if (abilityKey) { // Ensure only non-empty abilities are added
-                // Extract the ability name from the JSON data using the abilityKey
-                fetch("./src/combatsimulator/data/abilityDetailMap.json")
-                    .then(response => response.json())
-                    .then(data => {
-                        const abilityName = data[abilityKey].name; // Get the name from the JSON data
-                        abilitiesAutomation.push(abilityName);
-                        abilityLevels.push(parseInt(level));
-                        if (abilitiesAutomation.length === (18 - 10 + 1)) { // Ensure all abilities are processed
-                            console.log('Abilities:', abilitiesAutomation); // Logs all abilities
-                            console.log('Ability Levels:', abilityLevels); // Logs all levels
-                        }
-                    })
-                    .catch(error => console.error('Error:', error.message));
+            if (abilityName) { // Ensure only non-empty abilities are added
+                abilitiesAutomation.push(abilityName);
+                abilityLevels.push(parseInt(level));
+
+                if (abilitiesAutomation.length === (17 - 11 + 1)) { // Ensure all abilities are processed
+                    console.log('Abilities:', abilitiesAutomation); // Logs all abilities
+                    console.log('Ability Levels:', abilityLevels); // Logs all levels
+                }
             }
         }
     }
 }
+
 
 function permuteStart() {
     // PERMUTATIONS
@@ -3899,6 +3966,37 @@ function permuteStart() {
     });
 }
 
+// Reset info
+function resetListsAndIndices() {
+    abilitiesList1.length = 0;
+    abilitiesList2.length = 0;
+    abilitiesList3.length = 0;
+    abilitiesList4.length = 0;
+    abilitiesLevelList1.length = 0;
+    abilitiesLevelList2.length = 0;
+    abilitiesLevelList3.length = 0;
+    abilitiesLevelList4.length = 0;
+    abilitiesAutomation.length = 0;
+    abilityLevels.length = 0;
+
+    currentIndex1 = 0;
+    currentIndex2 = 0;
+    currentIndex3 = 0;
+    currentIndex4 = 0;
+    currentIndexLevels1 = 0;
+    currentIndexLevels2 = 0;
+    currentIndexLevels3 = 0;
+    currentIndexLevels4 = 0;
+
+    totalPermutations = 0;
+    currentPermutationIndex = 0;
+}
+
+// Stop button click event
+document.getElementById("stopAutomationButton").addEventListener("click", () => {
+    stopProcessing = true;
+});
+
 // Start button click event
 document.getElementById("startAutomationButton").addEventListener("click", function() {
     // Clear existing table rows if any
@@ -3913,14 +4011,14 @@ document.getElementById("startAutomationButton").addEventListener("click", funct
     }, 2000); // Initial 2-second delay
     console.log('Abilities:', abilitiesAutomation); // Logs all abilities
     console.log('Ability Levels:', abilityLevels); // Logs all levels
-    console.log('Ability Levels:', abilitiesList1);
-    console.log('Ability Levels:', abilitiesList2);
-    console.log('Ability Levels:', abilitiesList3);
-    console.log('Ability Levels:', abilitiesList4);
-    console.log('Ability Levels:', abilitiesLevelList1);
-    console.log('Ability Levels:', abilitiesLevelList2);
-    console.log('Ability Levels:', abilitiesLevelList3);
-    console.log('Ability Levels:', abilitiesLevelList4);
+    console.log('abilities List 1:', abilitiesList1);
+    console.log('abilities List 2:', abilitiesList2);
+    console.log('abilities List 3:', abilitiesList3);
+    console.log('abilities List 4:', abilitiesList4);
+    console.log('abilities Level List 1:', abilitiesLevelList1);
+    console.log('abilities Level List 2:', abilitiesLevelList2);
+    console.log('abilities Level List 3:', abilitiesLevelList3);
+    console.log('abilities Level List 4:', abilitiesLevelList4);
 });
 
 // #endregion

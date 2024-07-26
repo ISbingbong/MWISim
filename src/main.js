@@ -2202,35 +2202,71 @@ let currentPermutationIndex = 0; // Current permutation index
 
 // TABLE
 function updateSimulationResultsTable(simResult) {
-    // Create a new row in the table
+    // Select the table with the given id
     let table = document.getElementById("simulationResultsTable");
+
+    // Check if the table has no header row
+    if (table.rows.length === 0) {
+        let headerRow = table.insertRow();
+        let headers = ["Index", "Ability 1", "Ability 2", "Ability 3", "Ability 4", "Total Experience per Hour"];
+
+        ["Stamina", "Intelligence", "Attack", "Power", "Defense", "Ranged", "Magic"].forEach((skillAutomation) => {
+            let experienceAutomation = simResult.experienceGained["player"][skillAutomation.toLowerCase()] ?? 0;
+            if (experienceAutomation > 0) {
+                headers.push(skillAutomation);
+            }
+        });
+
+        headers.forEach(headerText => {
+            let headerCell = document.createElement("th");
+            headerCell.textContent = headerText;
+            headerRow.appendChild(headerCell);
+        });
+    }
+
+    // Create a new row in the table
     let newRow = table.insertRow();
 
     // Insert cells into the row
-    let indexCell = newRow.insertCell(0);
-    let experienceCell = newRow.insertCell(1);
-    let abilityCell1 = newRow.insertCell(2);
-    let abilityCell2 = newRow.insertCell(3);
-    let abilityCell3 = newRow.insertCell(4);
-    let abilityCell4 = newRow.insertCell(5);
+    let indexCell = newRow.insertCell();
+    let abilityCell1 = newRow.insertCell();
+    let abilityCell2 = newRow.insertCell();
+    let abilityCell3 = newRow.insertCell();
+    let abilityCell4 = newRow.insertCell();
+    let experienceCell = newRow.insertCell();
 
     // Experience calculations
     let hoursSimulatedAutomation = simResult.simulatedTime / ONE_HOUR;
     let totalExperienceAutomation = Object.values(simResult.experienceGained["player"]).reduce((prev, cur) => prev + cur, 0);
     let totalExperiencePerHourAutomation = (totalExperienceAutomation / hoursSimulatedAutomation).toFixed(0);
-    
-    // Populate cells with data
-    indexCell.textContent = table.rows.length - 1; // Row index
-    experienceCell.textContent = totalExperiencePerHourAutomation; // Simulation result
-    abilityCell1.textContent = abilitiesList1[currentIndex1]; // Ability 1 name
-    abilityCell2.textContent = abilitiesList2[currentIndex2]; // Ability 2 name
-    abilityCell3.textContent = abilitiesList3[currentIndex3]; // Ability 3 name
-    abilityCell4.textContent = abilitiesList4[currentIndex4]; // Ability 4 name
 
-    // Optionally, you can format the experienceCell content or add additional columns as needed
+    // Populate the cells with data
+    indexCell.textContent = table.rows.length - 1; // Assuming first row is headers
+    abilityCell1.textContent = document.getElementById('selectAbility_1').selectedOptions[0].textContent;
+    abilityCell2.textContent = document.getElementById('selectAbility_2').selectedOptions[0].textContent;
+    abilityCell3.textContent = document.getElementById('selectAbility_3').selectedOptions[0].textContent;
+    abilityCell4.textContent = document.getElementById('selectAbility_4').selectedOptions[0].textContent;
+    experienceCell.textContent = totalExperiencePerHourAutomation;
+
+    // Skill experience
+    ["Stamina", "Intelligence", "Attack", "Power", "Defense", "Ranged", "Magic"].forEach((skillAutomation) => {
+        let experienceAutomation = simResult.experienceGained["player"][skillAutomation.toLowerCase()] ?? 0;
+        if (experienceAutomation > 0) {
+            let experiencePerHourAutomation = (experienceAutomation / hoursSimulatedAutomation).toFixed(0);
+            let newCell = newRow.insertCell();
+            newCell.textContent = experiencePerHourAutomation;
+        }
+    });
 
     // Scroll to the bottom of the table
     table.parentNode.scrollTop = table.parentNode.scrollHeight;
+}
+
+// Helper function to create a new cell with specific content (if needed in the future)
+function createCellAutomation(content) {
+    let cell = document.createElement('td');
+    cell.textContent = content;
+    return cell;
 }
 
 // Populate ability dropdown
