@@ -1675,7 +1675,7 @@ function loadEquipmentSets() {
 function saveEquipmentSets(equipmentSets) {
     localStorage.setItem("equipmentSets", JSON.stringify(equipmentSets));
 }
-
+    
 function getEquipmentSetFromUI() {
     let equipmentSet = {
         levels: {},
@@ -1685,6 +1685,7 @@ function getEquipmentSetFromUI() {
         abilities: {},
         triggerMap: {},
         houseRooms: {},
+        abilitiesAutomationeq: {}, // Automation
     };
 
     ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach((skill) => {
@@ -1701,7 +1702,7 @@ function getEquipmentSetFromUI() {
             enhancementLevel: Number(enhancementLevelInput.value),
         };
     });
-
+    
     for (let i = 0; i < 3; i++) {
         let foodSelect = document.getElementById("selectFood_" + i);
         equipmentSet.food[i] = foodSelect.value;
@@ -1720,6 +1721,16 @@ function getEquipmentSetFromUI() {
             level: Number(abilityLevelInput.value),
         };
     }
+
+    for (let i = 10; i <= 17; i++) {
+        let abilitySelectAutomation = document.getElementById("selectAbility_" + i);
+        let abilityLevelInputAutomation = document.getElementById("inputAbilityLevel_" + i);
+        equipmentSet.abilitiesAutomationeq[i] = {
+            ability: abilitySelectAutomation ? abilitySelectAutomation.value : '',
+            level: abilityLevelInputAutomation ? Number(abilityLevelInputAutomation.value) : 0,
+        };
+    }
+    
 
     equipmentSet.triggerMap = triggerMap;
 
@@ -1772,6 +1783,19 @@ function loadEquipmentSetIntoUI(equipmentSet) {
         abilityLevelInput.value = equipmentSet.abilities[i].level;
     }
 
+    for (let i = 10; i <= 17; i++) {
+        let abilitySlotAutomation = i;
+        let abilitySelectAutomation = document.getElementById("selectAbility_" + abilitySlotAutomation);
+        let abilityLevelInputAutomation = document.getElementById("inputAbilityLevel_" + abilitySlotAutomation);
+        
+        if (abilitySelectAutomation && abilityLevelInputAutomation) {
+            abilitySelectAutomation.value = equipmentSet.abilitiesAutomationeq[i] ? equipmentSet.abilitiesAutomationeq[i].ability : '';
+            abilityLevelInputAutomation.value = equipmentSet.abilitiesAutomationeq[i] ? equipmentSet.abilitiesAutomationeq[i].level : 0;
+        }
+    }
+    
+
+
     triggerMap = equipmentSet.triggerMap;
 
     if (equipmentSet.houseRooms) {
@@ -1785,7 +1809,7 @@ function loadEquipmentSetIntoUI(equipmentSet) {
         }
         player.houseRooms = equipmentSet.houseRooms;
     } else {
-        let houseRooms = Object.values(houseRoomDetailMap);
+        let houseRooms = Object.values(_combatsimulator_data_houseRoomDetailMap_json__WEBPACK_IMPORTED_MODULE_4__);
         for (const room of Object.values(houseRooms)) {
             const field = document.querySelector('[data-house-hrid="' + room.hrid + '"]');
             field.value = '';
@@ -2514,6 +2538,9 @@ function permuteStart() {
     });
 }
 
+function getAbilitySelectionAutomation() {}
+
+function loadAbilitySelectionAutomation() {}
 // Reset info
 function resetListsAndIndices() {
     abilitiesList1.length = 0;

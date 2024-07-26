@@ -3136,6 +3136,7 @@
             abilities: {},
             triggerMap: {},
             houseRooms: {},
+            abilitiesAutomationeq: {}, // Automation
         };
     
         ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach((skill) => {
@@ -3152,7 +3153,7 @@
                 enhancementLevel: Number(enhancementLevelInput.value),
             };
         });
-    
+        
         for (let i = 0; i < 3; i++) {
             let foodSelect = document.getElementById("selectFood_" + i);
             equipmentSet.food[i] = foodSelect.value;
@@ -3172,6 +3173,16 @@
             };
         }
     
+        for (let i = 10; i <= 17; i++) {
+            let abilitySelectAutomation = document.getElementById("selectAbility_" + i);
+            let abilityLevelInputAutomation = document.getElementById("inputAbilityLevel_" + i);
+            equipmentSet.abilitiesAutomationeq[i] = {
+                ability: abilitySelectAutomation ? abilitySelectAutomation.value : '',
+                level: abilityLevelInputAutomation ? Number(abilityLevelInputAutomation.value) : 0,
+            };
+        }
+        
+
         equipmentSet.triggerMap = triggerMap;
     
         equipmentSet.houseRooms = player.houseRooms;
@@ -3223,6 +3234,19 @@
             abilityLevelInput.value = equipmentSet.abilities[i].level;
         }
     
+        for (let i = 10; i <= 17; i++) {
+            let abilitySlotAutomation = i;
+            let abilitySelectAutomation = document.getElementById("selectAbility_" + abilitySlotAutomation);
+            let abilityLevelInputAutomation = document.getElementById("inputAbilityLevel_" + abilitySlotAutomation);
+            
+            if (abilitySelectAutomation && abilityLevelInputAutomation) {
+                abilitySelectAutomation.value = equipmentSet.abilitiesAutomationeq[i] ? equipmentSet.abilitiesAutomationeq[i].ability : '';
+                abilityLevelInputAutomation.value = equipmentSet.abilitiesAutomationeq[i] ? equipmentSet.abilitiesAutomationeq[i].level : 0;
+            }
+        }
+        
+
+
         triggerMap = equipmentSet.triggerMap;
     
         if (equipmentSet.houseRooms) {
@@ -3889,11 +3913,11 @@ function listFiller() {
             const abilityName = abilitySelect.value; // Get the name of the selected ability
             const level = abilityLevel.value;
             if (abilityName) { // Ensure only non-empty abilities are added
-                abilitiesAutomation.push(abilityName);
+                abilitiesAutomationeq.push(abilityName);
                 abilityLevels.push(parseInt(level));
 
-                if (abilitiesAutomation.length === (17 - 11 + 1)) { // Ensure all abilities are processed
-                    console.log('Abilities:', abilitiesAutomation); // Logs all abilities
+                if (abilitiesAutomationeq.length === (17 - 11 + 1)) { // Ensure all abilities are processed
+                    console.log('Abilities:', abilitiesAutomationeq); // Logs all abilities
                     console.log('Ability Levels:', abilityLevels); // Logs all levels
                 }
             }
