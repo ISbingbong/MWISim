@@ -3913,11 +3913,11 @@ function listFiller() {
             const abilityName = abilitySelect.value; // Get the name of the selected ability
             const level = abilityLevel.value;
             if (abilityName) { // Ensure only non-empty abilities are added
-                abilitiesAutomationeq.push(abilityName);
+                abilitiesAutomation.push(abilityName);
                 abilityLevels.push(parseInt(level));
 
-                if (abilitiesAutomationeq.length === (17 - 11 + 1)) { // Ensure all abilities are processed
-                    console.log('Abilities:', abilitiesAutomationeq); // Logs all abilities
+                if (abilitiesAutomation.length === (17 - 11 + 1)) { // Ensure all abilities are processed
+                    console.log('Abilities:', abilitiesAutomation); // Logs all abilities
                     console.log('Ability Levels:', abilityLevels); // Logs all levels
                 }
             }
