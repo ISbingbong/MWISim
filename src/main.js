@@ -2234,7 +2234,7 @@ function updateSimulationResultsTable(simResult) {
     // Check if thead has no header row
     if (!thead.querySelector('tr').children.length) {
         // Define headers
-        let headers = ["Index", "Ability 1", "Ability 2", "Ability 3", "Ability 4", 
+        let headers = ["Index", "Ability 1", "Ability 2", "Ability 3", "Ability 4", "Eph",
                        "Total exp", "Stamina", "Intelligence", 
                        "Attack", "Power", "Defense", "Ranged", "Magic"];
 
@@ -2251,10 +2251,11 @@ function updateSimulationResultsTable(simResult) {
     // Create a new row in the table
     let newRow = document.createElement('tr');
 
-    // Experience calculations
+  // Experience calculations
     let hoursSimulatedAutomation = simResult.simulatedTime / ONE_HOUR;
     let totalExperienceAutomation = Object.values(simResult.experienceGained["player"]).reduce((prev, cur) => prev + cur, 0);
     let totalExperiencePerHourAutomation = (totalExperienceAutomation / hoursSimulatedAutomation).toFixed(0);
+    let automationEph = (simResult.encounters / hoursSimulatedAutomation).toFixed(1);
 
     // Populate the cells with data
     let cells = [
@@ -2263,8 +2264,10 @@ function updateSimulationResultsTable(simResult) {
         document.getElementById('selectAbility_2').selectedOptions[0].textContent,
         document.getElementById('selectAbility_3').selectedOptions[0].textContent,
         document.getElementById('selectAbility_4').selectedOptions[0].textContent,
+        automationEph,
         totalExperiencePerHourAutomation
     ];
+
 
     ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach(skillAutomation => {
         let experienceAutomation = simResult.experienceGained["player"][skillAutomation] ?? 0;
